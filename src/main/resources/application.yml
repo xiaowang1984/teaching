@@ -1,0 +1,7 @@
+server:
+  port: 8888
+mybatis:
+  typeAliasesPackage: com.neuedu.pojo
+logging:
+  level:
+    com.neuedu.dao: debug
