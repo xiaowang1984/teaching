@@ -3,6 +3,7 @@ package com.neuedu.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.neuedu.core.DateConvert;
 import com.neuedu.core.EncryptPropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
@@ -11,6 +12,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -23,6 +25,7 @@ import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Configuration
@@ -113,5 +116,9 @@ public class Config {
     @Bean
     public DataSourceTransactionManager getDataSourceTransactionManager(@Qualifier("dataSource") DataSource dataSource){
         return new DataSourceTransactionManager(dataSource);
+    }
+    @Bean
+    public Converter<String,Date> getConverter(){
+        return new DateConvert();
     }
 }

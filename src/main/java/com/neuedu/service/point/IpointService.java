@@ -1,6 +1,7 @@
 package com.neuedu.service.point;
 
 import com.neuedu.pojo.Point;
+import com.neuedu.pojo.Student;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ public interface IpointService  {
     int add(Point point);
     Point getPointById(int id);
     int update(Point point);
+
 }

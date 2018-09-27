@@ -30,4 +30,8 @@ public class PlanController {
     public Message update(Plan plan){
         return new Message(planService.edit(plan));
     }
+    @GetMapping("/getPlanById")
+    public  Plan getPlanById(int id){
+        return planService.getPlanById(id);
+    }
 }

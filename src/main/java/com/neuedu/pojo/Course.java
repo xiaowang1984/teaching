@@ -1,5 +1,7 @@
 package com.neuedu.pojo;
 
+import java.util.List;
+
 public class Course {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class Course {
     private Integer isDel;
 
     private String img;
+
+    private List<Plan> plans;
 
     public Integer getId() {
         return id;
@@ -49,5 +53,13 @@ public class Course {
 
     public void setImg(String img) {
         this.img = img == null ? null : img.trim();
+    }
+
+    public List<Plan> getPlans() {
+        return plans;
+    }
+
+    public void setPlans(List<Plan> plans) {
+        this.plans = plans;
     }
 }

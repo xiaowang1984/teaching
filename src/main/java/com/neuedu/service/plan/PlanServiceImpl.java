@@ -19,6 +19,18 @@ public class PlanServiceImpl implements IplanService {
     }
 
     @Override
+    public List<Plan> getPlansByCid(int cId) {
+        PlanExample planExample=new PlanExample();
+        planExample.createCriteria().andCIdEqualTo(cId).andIsDelEqualTo(1);
+        return planMapper.selectByExample(planExample);
+    }
+
+    @Override
+    public Plan getPlanById(int id) {
+        return planMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public int add(Plan plan) {
         return planMapper.insertSelective(plan);
     }

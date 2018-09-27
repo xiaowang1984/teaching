@@ -274,6 +274,27 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into student ( no, git,
+      name, gender, nation,
+      sale, school, specialty,
+      education, qq, address,
+      email, room_no, cycle,
+      refund, phone, id_card,
+      we_char, status, g_id,
+      is_del)
+    values
+    <foreach collection="list" item="student" separator=",">
+      (#{student.no,jdbcType=INTEGER}, #{student.git,jdbcType=VARCHAR},
+      #{student.name,jdbcType=VARCHAR}, #{student.gender,jdbcType=INTEGER}, #{student.nation,jdbcType=VARCHAR},
+      #{student.sale,jdbcType=VARCHAR}, #{student.school,jdbcType=VARCHAR}, #{student.specialty,jdbcType=VARCHAR},
+      #{student.education,jdbcType=VARCHAR}, #{student.qq,jdbcType=VARCHAR}, #{student.address,jdbcType=VARCHAR},
+      #{student.email,jdbcType=VARCHAR}, #{student.roomNo,jdbcType=VARCHAR}, #{student.cycle,jdbcType=VARCHAR},
+      #{student.refund,jdbcType=INTEGER}, #{student.phone,jdbcType=VARCHAR}, #{student.idCard,jdbcType=VARCHAR},
+      #{student.weChar,jdbcType=VARCHAR}, #{student.status,jdbcType=INTEGER}, #{student.gId,jdbcType=INTEGER},
+      #{student.isDel,jdbcType=INTEGER})
+    </foreach>
+  </insert>
   <select id="countByExample" parameterType="com.neuedu.pojo.StudentExample" resultType="java.lang.Integer" >
     select count(*) from student
     <if test="_parameter != null" >

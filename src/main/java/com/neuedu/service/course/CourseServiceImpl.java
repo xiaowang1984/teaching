@@ -1,11 +1,12 @@
 package com.neuedu.service.course;
 
 import com.neuedu.dao.CourseMapper;
+import com.neuedu.dao.PlanMapper;
 import com.neuedu.pojo.Course;
 import com.neuedu.pojo.CourseExample;
+import com.neuedu.service.plan.IplanService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import java.util.List;
 public class CourseServiceImpl implements IcourseService {
     @Resource
     CourseMapper courseMapper;
+    @Resource
+    IplanService planService;
     @Override
     public List<Course> getCourse(Course course) {
         CourseExample courseExample=new CourseExample();
@@ -42,5 +45,17 @@ public class CourseServiceImpl implements IcourseService {
     @Override
     public Course getCourseById(int id) {
         return courseMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Course> getCourseWithPlan() {
+        CourseExample courseExample=new CourseExample();
+        courseExample.setOrderByClause("name asc");
+        courseExample.createCriteria().andIsDelEqualTo(1);
+        List<Course> courses=courseMapper.selectByExampleWithBLOBs(courseExample);
+        for (Course course : courses){
+            course.setPlans(planService.getPlansByCid(course.getId()));
+        }
+        return courses;
     }
 }

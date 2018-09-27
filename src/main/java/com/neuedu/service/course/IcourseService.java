@@ -9,4 +9,5 @@ public interface IcourseService {
     int add(Course course);
     int edit(Course course);
     Course getCourseById(int id);
+    List<Course> getCourseWithPlan();
 }

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.ArrangeListMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.pojo.ArrangeList" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="morning" property="morning" jdbcType="VARCHAR" />
+    <result column="afternoon" property="afternoon" jdbcType="VARCHAR" />
+    <result column="night" property="night" jdbcType="VARCHAR" />
+    <result column="mtime" property="mtime" jdbcType="REAL" />
+    <result column="atime" property="atime" jdbcType="REAL" />
+    <result column="ntime" property="ntime" jdbcType="REAL" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.neuedu.pojo.ArrangeListWithBLOBs" extends="BaseResultMap" >
+    <result column="work" property="work" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, a_id, date, morning, afternoon, night, mtime, atime, ntime, is_del
+  </sql>
+  <sql id="Blob_Column_List" >
+    work, remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.neuedu.pojo.ArrangeListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from arrange_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.ArrangeListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from arrange_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from arrange_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from arrange_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.pojo.ArrangeListExample" >
+    delete from arrange_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.pojo.ArrangeListWithBLOBs" >
+    insert into arrange_list (id, a_id, date, morning, 
+      afternoon, night, mtime, 
+      atime, ntime, is_del, work, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{aId,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{morning,jdbcType=VARCHAR}, 
+      #{afternoon,jdbcType=VARCHAR}, #{night,jdbcType=VARCHAR}, #{mtime,jdbcType=REAL}, 
+      #{atime,jdbcType=REAL}, #{ntime,jdbcType=REAL}, #{isDel,jdbcType=INTEGER}, #{work,jdbcType=LONGVARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.pojo.ArrangeListWithBLOBs" >
+    insert into arrange_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="aId != null" >
+        a_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="morning != null" >
+        morning,
+      </if>
+      <if test="afternoon != null" >
+        afternoon,
+      </if>
+      <if test="night != null" >
+        night,
+      </if>
+      <if test="mtime != null" >
+        mtime,
+      </if>
+      <if test="atime != null" >
+        atime,
+      </if>
+      <if test="ntime != null" >
+        ntime,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="work != null" >
+        work,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="aId != null" >
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="morning != null" >
+        #{morning,jdbcType=VARCHAR},
+      </if>
+      <if test="afternoon != null" >
+        #{afternoon,jdbcType=VARCHAR},
+      </if>
+      <if test="night != null" >
+        #{night,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null" >
+        #{mtime,jdbcType=REAL},
+      </if>
+      <if test="atime != null" >
+        #{atime,jdbcType=REAL},
+      </if>
+      <if test="ntime != null" >
+        #{ntime,jdbcType=REAL},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="work != null" >
+        #{work,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.pojo.ArrangeListExample" resultType="java.lang.Integer" >
+    select count(*) from arrange_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update arrange_list
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.aId != null" >
+        a_id = #{record.aId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.morning != null" >
+        morning = #{record.morning,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afternoon != null" >
+        afternoon = #{record.afternoon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.night != null" >
+        night = #{record.night,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtime != null" >
+        mtime = #{record.mtime,jdbcType=REAL},
+      </if>
+      <if test="record.atime != null" >
+        atime = #{record.atime,jdbcType=REAL},
+      </if>
+      <if test="record.ntime != null" >
+        ntime = #{record.ntime,jdbcType=REAL},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.work != null" >
+        work = #{record.work,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update arrange_list
+    set id = #{record.id,jdbcType=INTEGER},
+      a_id = #{record.aId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=DATE},
+      morning = #{record.morning,jdbcType=VARCHAR},
+      afternoon = #{record.afternoon,jdbcType=VARCHAR},
+      night = #{record.night,jdbcType=VARCHAR},
+      mtime = #{record.mtime,jdbcType=REAL},
+      atime = #{record.atime,jdbcType=REAL},
+      ntime = #{record.ntime,jdbcType=REAL},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      work = #{record.work,jdbcType=LONGVARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update arrange_list
+    set id = #{record.id,jdbcType=INTEGER},
+      a_id = #{record.aId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=DATE},
+      morning = #{record.morning,jdbcType=VARCHAR},
+      afternoon = #{record.afternoon,jdbcType=VARCHAR},
+      night = #{record.night,jdbcType=VARCHAR},
+      mtime = #{record.mtime,jdbcType=REAL},
+      atime = #{record.atime,jdbcType=REAL},
+      ntime = #{record.ntime,jdbcType=REAL},
+      is_del = #{record.isDel,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.pojo.ArrangeListWithBLOBs" >
+    update arrange_list
+    <set >
+      <if test="aId != null" >
+        a_id = #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="morning != null" >
+        morning = #{morning,jdbcType=VARCHAR},
+      </if>
+      <if test="afternoon != null" >
+        afternoon = #{afternoon,jdbcType=VARCHAR},
+      </if>
+      <if test="night != null" >
+        night = #{night,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null" >
+        mtime = #{mtime,jdbcType=REAL},
+      </if>
+      <if test="atime != null" >
+        atime = #{atime,jdbcType=REAL},
+      </if>
+      <if test="ntime != null" >
+        ntime = #{ntime,jdbcType=REAL},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="work != null" >
+        work = #{work,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neuedu.pojo.ArrangeListWithBLOBs" >
+    update arrange_list
+    set a_id = #{aId,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      morning = #{morning,jdbcType=VARCHAR},
+      afternoon = #{afternoon,jdbcType=VARCHAR},
+      night = #{night,jdbcType=VARCHAR},
+      mtime = #{mtime,jdbcType=REAL},
+      atime = #{atime,jdbcType=REAL},
+      ntime = #{ntime,jdbcType=REAL},
+      is_del = #{isDel,jdbcType=INTEGER},
+      work = #{work,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.ArrangeList" >
+    update arrange_list
+    set a_id = #{aId,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      morning = #{morning,jdbcType=VARCHAR},
+      afternoon = #{afternoon,jdbcType=VARCHAR},
+      night = #{night,jdbcType=VARCHAR},
+      mtime = #{mtime,jdbcType=REAL},
+      atime = #{atime,jdbcType=REAL},
+      ntime = #{ntime,jdbcType=REAL},
+      is_del = #{isDel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getDatesByGid" resultType="java.util.Date" parameterType="java.lang.Integer">
+    select date from arrange_list where a_id in (select id from arrange where g_id=#{1}) and is_del=1 order by date
+  </select>
+  <select id="getDatesWithOutAid" resultType="java.util.Date" parameterType="java.lang.Integer">
+    select date from arrange_list where a_id in (select id from arrange where g_id=#{arg0} and a_id!=#{arg1}) and is_del=1 order by date
+  </select>
+</mapper>

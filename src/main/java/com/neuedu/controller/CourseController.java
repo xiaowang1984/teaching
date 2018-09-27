@@ -35,7 +35,6 @@ public class CourseController {
         }
         return message;
     }
-
     @GetMapping("/edit")
     public Course getCourseById(int id){
         return courseService.getCourseById(id);
@@ -55,5 +54,8 @@ public class CourseController {
         }
         return message;
     }
-
+    @GetMapping("/getCourses")
+    public List<Course> getCourses(){
+        return courseService.getCourseWithPlan();
+    }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AutoCode {
     public static void main(String[] args) throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
-        List<String> warnings = new ArrayList<String>();
+        List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
         //指定逆向工程配置文件
         File configFile = new File(System.getProperty("user.dir")+"/src/main/resources/mybatis/mybatis.xml");

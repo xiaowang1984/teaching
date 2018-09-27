@@ -27,4 +27,6 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    int insertBatch(List<Student> students);
 }
