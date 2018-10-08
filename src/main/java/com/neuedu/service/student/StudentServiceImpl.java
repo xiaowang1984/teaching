@@ -101,4 +101,12 @@ public class StudentServiceImpl implements IstudentService {
         studentExample.createCriteria().andIdCardEqualTo(student.getIdCard());
         return studentMapper.countByExample(studentExample);
     }
+
+    @Override
+    public List<Student> getStudentsByGid(int gId) {
+        StudentExample example = new StudentExample();
+        example.createCriteria().andGIdEqualTo(gId).andIsDelEqualTo(1);
+        return studentMapper.selectByExample(example);
+    }
+
 }

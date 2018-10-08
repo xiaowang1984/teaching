@@ -40,4 +40,6 @@ public interface ArrangeListMapper {
     List<Date> getDatesByGid(int gId);
 
     List<Date> getDatesWithOutAid(int gId,int aId);
+
+    List<ArrangeListWithBLOBs> logsByGid(int gId);
 }

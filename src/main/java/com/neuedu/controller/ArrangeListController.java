@@ -1,5 +1,6 @@
 package com.neuedu.controller;
 
+import com.neuedu.pojo.ArrangeListWithBLOBs;
 import com.neuedu.service.arrangeList.IarrangeListService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +22,9 @@ public class ArrangeListController {
     @GetMapping("/getDatesWithoutAid")
     public List<Date> getDates(int gId,int aId){
         return arrangeListService.getDates(gId, aId);
+    }
+    @GetMapping("/logs")
+    public List<ArrangeListWithBLOBs> logs(int gId){
+        return arrangeListService.logsByGid(gId);
     }
 }

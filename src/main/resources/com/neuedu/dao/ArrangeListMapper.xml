@@ -375,4 +375,11 @@
   <select id="getDatesWithOutAid" resultType="java.util.Date" parameterType="java.lang.Integer">
     select date from arrange_list where a_id in (select id from arrange where g_id=#{arg0} and a_id!=#{arg1}) and is_del=1 order by date
   </select>
+  <select id="logsByGid" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from arrange_list
+    where a_id in(select id from arrange where g_id=#{1} and is_del=1) and is_del=1 order by date
+  </select>
 </mapper>

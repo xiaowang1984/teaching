@@ -16,4 +16,5 @@ public interface IstudentService {
     int count(int gId);
     int offerCount(int gId);
     int checkIdCard(Student student);
+    List<Student> getStudentsByGid(int gId);
 }

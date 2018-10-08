@@ -70,5 +70,10 @@ public class ArrangeListServiceImpl implements IarrangeListService {
         return arrangeListMapper.updateByExampleSelective(arrangeList, arrangeListExample);
     }
 
+    @Override
+    public List<ArrangeListWithBLOBs> logsByGid(int gId) {
+        return arrangeListMapper.logsByGid(gId);
+    }
+
 
 }

@@ -109,4 +109,8 @@ public class StudentController {
             map.put("getdata","true");
         return map;
     }
+    @GetMapping("/getStudents")
+    public List<Student> getStudents(int gId){
+        return studentService.getStudentsByGid(gId);
+    }
 }

@@ -16,4 +16,5 @@ public interface IarrangeListService {
     int active(ArrangeList arrangeList);
     ArrangeList getArrangeListByDate(int aId,Date date);
     int del(ArrangeListWithBLOBs arrangeList);
+    List<ArrangeListWithBLOBs> logsByGid(int gId);
 }
