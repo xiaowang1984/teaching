@@ -58,7 +58,7 @@ public class StudentController {
             int count=4;
             Row row=null;
             while((row= sheet.getRow(count++))!=null){
-                if(StringUtils.isBlank(row.getCell(0).getStringCellValue()))
+                if(row.getCell(3)==null||row.getCell(3).toString().trim().equals(""))
                     break;
                 Student student=new Student();
                 float no=Float.parseFloat(row.getCell(3).toString().trim());
@@ -93,8 +93,8 @@ public class StudentController {
                 if(row.getCell(26)!=null)
                     student.setGit(row.getCell(26).toString().trim());
                 students.add(student);
-                result=studentService.bathUpdate(students);
             }
+            result=studentService.bathUpdate(students);
         } catch (IOException e) {
             e.printStackTrace();
             result=0;

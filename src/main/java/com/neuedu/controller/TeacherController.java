@@ -23,7 +23,16 @@ public class TeacherController {
     @GetMapping("/list")
     public Result list(Teacher teacher){
         List<Teacher> teachers=teacherService.getTeacher(teacher);
-        return new Result(teachers,((Page<Teacher>)teachers).getPages(),((Page<Teacher>)teachers).getPageNum());
+        if(teachers instanceof Page){
+            return new Result(teachers,((Page<Teacher>)teachers).getPages(),((Page<Teacher>)teachers).getPageNum());
+        }else{
+            return new Result(teachers,1,1);
+        }
+
+    }
+    @GetMapping("/listforgrade")
+    public List<Teacher> listforgrade(Teacher teacher){
+        return teacherService.getTeacher(teacher);
     }
     @PostMapping("/add")
     public Message add(Teacher teacher){

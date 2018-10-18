@@ -40,6 +40,8 @@ public class Grade extends Page{
 
     private List<Student> students;
 
+    private List<Arrange> arranges;
+
     public Integer getId() {
         return id;
     }
@@ -182,5 +184,13 @@ public class Grade extends Page{
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<Arrange> getArranges() {
+        return arranges;
+    }
+
+    public void setArranges(List<Arrange> arranges) {
+        this.arranges = arranges;
     }
 }

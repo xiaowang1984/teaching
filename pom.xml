@@ -18,6 +18,7 @@
         <mybatis.generator.version>1.3.2</mybatis.generator.version>
         <poi.version>3.14</poi.version>
         <fileupload.version>1.3.1</fileupload.version>
+        <guawa.version>25.1-jre</guawa.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -108,6 +109,12 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>${fileupload.version}</version>
+        </dependency>
+        <!--引入guava组件 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guawa.version}</version>
         </dependency>
     </dependencies>
     <build>

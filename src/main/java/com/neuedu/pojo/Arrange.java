@@ -28,6 +28,10 @@ public class Arrange {
 
     private List<ArrangeListWithBLOBs> arrangeList;
 
+    private String img;
+
+    private String pname;
+
     public Integer getId() {
         return id;
     }
@@ -122,6 +126,22 @@ public class Arrange {
 
     public void setArrangeList(List<ArrangeListWithBLOBs> arrangeList) {
         this.arrangeList = arrangeList;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
     @Override

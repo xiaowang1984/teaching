@@ -11,4 +11,7 @@ public interface IarrangeService {
     int update(Arrange arrange,Date[] dates);
     int del(Arrange arrange);
     List<Arrange> getArrangeByGid(int gId);
+    List<Arrange> getBoard(int gId);
+    String getLogo(Arrange arrange);
+    String getPname(Arrange arrange);
 }

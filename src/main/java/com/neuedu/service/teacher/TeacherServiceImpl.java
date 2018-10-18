@@ -29,6 +29,8 @@ public class TeacherServiceImpl implements IteacherService {
             criteria.andTypeEqualTo(teacher.getType());
         if(StringUtils.isNotBlank(teacher.getName()))
             criteria.andNameLike("%"+teacher.getName()+"%");
+        if(teacher.getIsDel()!=null)
+            criteria.andIsDelEqualTo(teacher.getIsDel());
         if(teacher.getWithPage()==1)
             PageHelper.startPage(teacher.getPageNo(),teacher.getPageSize());
         return teacherMapper.selectByExample(teacherExample);
@@ -48,4 +50,6 @@ public class TeacherServiceImpl implements IteacherService {
     public int update(Teacher teacher) {
         return teacherMapper.updateByPrimaryKeySelective(teacher);
     }
+
+
 }

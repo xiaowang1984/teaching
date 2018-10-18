@@ -10,5 +10,5 @@ public interface IpointService  {
     int add(Point point);
     Point getPointById(int id);
     int update(Point point);
-
+    List<Point> getPointsByIds(int[] ids);
 }

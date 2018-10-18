@@ -21,6 +21,7 @@ public class ModuleServiceImpl implements ImoduleService{
         ModuleExample moduleExample=new ModuleExample();
         ModuleExample.Criteria criteria = moduleExample.createCriteria();
         criteria.andIsDelEqualTo(1);
+        moduleExample.setOrderByClause("sort desc");
         if (module!=null){
             if(module.getlId()!=null){
                 criteria.andLIdEqualTo(module.getlId());

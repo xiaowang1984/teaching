@@ -8,4 +8,6 @@ public interface IgradeService {
     List<Grade> list(Grade grade);
     void gradeDetails(Grade grade);
     Grade getGradeById(int id);
+    String getLogo(int id);
+    Grade board(int gId);
 }
