@@ -1,12 +1,10 @@
 package com.neuedu.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.alibaba.fastjson.JSONObject;
+
 import com.neuedu.core.Constants;
 import com.neuedu.core.MyUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -25,6 +23,7 @@ public class UtilController {
             url = "redirect:" + callBackPath + "?error=1&message=上传错误";
             e.printStackTrace();
         }
+
         return url;
     }
 }
