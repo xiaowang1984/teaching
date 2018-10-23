@@ -42,9 +42,10 @@ public class WorkController {
     public Work getOne(int id){
         return workService.getWorkById(id);
     }
-    @RequestMapping("/git")
+    @RequestMapping("/up")
     public String gitLoad(@RequestBody Map<String, String> parameterMap) {
         // TODO Auto-generated method stub
+        System.out.println("进入该方法");
         File file=new File("/abcd.txt");
         Set<String> keys= parameterMap.keySet();
         StringBuilder builder=new StringBuilder();
