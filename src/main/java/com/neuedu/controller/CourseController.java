@@ -58,4 +58,8 @@ public class CourseController {
     public List<Course> getCourses(){
         return courseService.getCourseWithPlan();
     }
+    @GetMapping("/getCourseByGid")
+    public List<Course> getCourseByGid(int gId){
+        return courseService.getCourseByGid(gId);
+    }
 }

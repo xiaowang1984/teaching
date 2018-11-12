@@ -1,6 +1,7 @@
 package com.neuedu.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Work extends Page{
     private Integer id;
@@ -32,6 +33,12 @@ public class Work extends Page{
     private Date endDat;
 
     private String description;
+
+    private List<Workgrade> workgrade;
+
+    private Integer done;
+
+    private Integer code;
 
     public Integer getId() {
         return id;
@@ -152,4 +159,29 @@ public class Work extends Page{
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+
+    public List<Workgrade> getWorkgrade() {
+        return workgrade;
+    }
+
+    public void setWorkgrade(List<Workgrade> workgrade) {
+        this.workgrade = workgrade;
+    }
+
+    public Integer getDone() {
+        return done;
+    }
+
+    public void setDone(Integer done) {
+        this.done = done;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
 }

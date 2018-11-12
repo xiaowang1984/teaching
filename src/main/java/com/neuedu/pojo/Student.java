@@ -1,5 +1,7 @@
 package com.neuedu.pojo;
 
+import java.util.List;
+
 public class Student {
     private Integer id;
 
@@ -44,6 +46,10 @@ public class Student {
     private Integer gId;
 
     private Integer isDel;
+
+    private List<Workstudent> works;
+
+    private String pwd;
 
     public Integer getId() {
         return id;
@@ -219,5 +225,21 @@ public class Student {
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    public List<Workstudent> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<Workstudent> works) {
+        this.works = works;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd==null?null:pwd.trim();
     }
 }

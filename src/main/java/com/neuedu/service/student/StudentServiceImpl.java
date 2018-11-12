@@ -7,6 +7,7 @@ import com.neuedu.pojo.Student;
 import com.neuedu.pojo.StudentExample;
 import com.neuedu.service.grade.IgradeService;
 import com.neuedu.service.teacher.IteacherService;
+import com.neuedu.service.workstudent.IworkstudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,8 @@ public class StudentServiceImpl implements IstudentService {
     StudentMapper studentMapper;
     @Resource
     IgradeService gradeService;
+    @Resource
+    IworkstudentService workstudentService;
     @Override
     public Grade list(Student student) {
         StudentExample studentExample=new StudentExample();
@@ -107,6 +110,44 @@ public class StudentServiceImpl implements IstudentService {
         StudentExample example = new StudentExample();
         example.createCriteria().andGIdEqualTo(gId).andIsDelEqualTo(1);
         return studentMapper.selectByExample(example);
+    }
+
+    @Override
+    public Student getStudentByGit(String git) {
+        StudentExample studentExample = new StudentExample();
+        studentExample.createCriteria().andGitEqualTo(git);
+        List<Student> students = studentMapper.selectByExample(studentExample);
+        if(students.size()==1)
+            return students.get(0);
+        return null;
+    }
+
+    @Override
+    public List<Student> getStudentWork(int gId, int wId) {
+        StudentExample studentExample=new StudentExample();
+        studentExample.createCriteria().andGIdEqualTo(gId);
+        List<Student> students = studentMapper.selectByExample(studentExample);
+        for(Student student : students){
+            student.setWorks(workstudentService.list(wId, student.getId()));
+        }
+        return students;
+    }
+
+    @Override
+    public Student login(String loginId) {
+        StudentExample studentExample = new StudentExample();
+        studentExample.createCriteria().andIsDelEqualTo(1).andStatusEqualTo(1).andPhoneEqualTo(loginId);
+        List<Student> students = studentMapper.selectByExample(studentExample);
+        if(students.size()==1)
+            return students.get(0);
+        return null;
+    }
+
+    @Override
+    public int studentcount(int gId) {
+        StudentExample studentExample = new StudentExample();
+        studentExample.createCriteria().andGIdEqualTo(gId).andIsDelEqualTo(1).andStatusEqualTo(1);
+        return studentMapper.countByExample(studentExample);
     }
 
 }

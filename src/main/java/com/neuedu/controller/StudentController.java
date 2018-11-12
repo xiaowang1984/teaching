@@ -1,9 +1,12 @@
 package com.neuedu.controller;
 
+import com.neuedu.core.DESUtils;
 import com.neuedu.message.Message;
 import com.neuedu.pojo.Grade;
 import com.neuedu.pojo.Student;
+import com.neuedu.pojo.Studentlog;
 import com.neuedu.service.student.IstudentService;
+import com.neuedu.service.studentlog.IstudentLogService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -17,17 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/student")
 public class StudentController {
     @Resource
     IstudentService studentService;
+    @Resource
+    IstudentLogService studentLogService;
     @GetMapping("/list")
     public Grade list(Student student){
         return studentService.list(student);
@@ -112,5 +115,37 @@ public class StudentController {
     @GetMapping("/getStudents")
     public List<Student> getStudents(int gId){
         return studentService.getStudentsByGid(gId);
+    }
+    @PostMapping("/login")
+    public Message login(String loginId,String pwd,HttpSession session){
+        Student student = studentService.login(loginId);
+        if(student==null)
+            return new Message(0,"用户名不存在");
+        else{
+            if(student.getPwd().equals(DESUtils.getEncryptString(pwd))) {
+                session.setAttribute("user", student);
+                return new Message(1, "登录成功");
+            }else
+                return new Message(0,"密码错误");
+        }
+    }
+    @PostMapping("/logsave")
+    public Message logsave(Studentlog studentlog,HttpSession session){
+        return new Message(studentLogService.save(studentlog, session));
+    }
+    @GetMapping("/getLogOne")
+    public Studentlog getLogOne(Studentlog studentlog,HttpSession session){
+        Student student = (Student) session.getAttribute("user");
+        studentlog.setSid(student.getId());
+        Studentlog result = studentLogService.getStudentLogBySid(studentlog);
+        if(result != null)
+            return result;
+        else
+            return new Studentlog();
+    }
+    @GetMapping("/getLogs")
+    public List<Studentlog> getLogs(int year,int month,HttpSession session){
+        Student student = (Student) session.getAttribute("user");
+        return studentLogService.getLogs(year,month, student.getId());
     }
 }

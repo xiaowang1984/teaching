@@ -58,7 +58,7 @@ public class GradeServiceImpl implements IgradeService {
             grade.setPageSize(20);
             PageHelper.startPage(grade.getPageNo(), grade.getPageSize());
         }
-        gradeExample.setOrderByClause("id desc");
+        gradeExample.setOrderByClause("start_date desc");
         List<Grade> grades=gradeMapper.selectByExample(gradeExample);
         for (Grade entry : grades){
             gradeDetails(entry);

@@ -16,6 +16,8 @@
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
     <result column="start_dat" property="startDat" jdbcType="DATE" />
     <result column="end_dat" property="endDat" jdbcType="DATE" />
+    <result column="done" property="done" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.neuedu.pojo.Work" extends="BaseResultMap" >
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
@@ -79,7 +81,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gid, name, level, extend, type, count, language, point, url, provider, is_del, 
+    id, gid, name, level, extend, type, count, language, point, url, provider, is_del, done, code,
     start_dat, end_dat
   </sql>
   <sql id="Blob_Column_List" >

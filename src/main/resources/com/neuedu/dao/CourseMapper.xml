@@ -248,4 +248,10 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getCourseByGid"  resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+      <include refid="Base_Column_List" />
+    from course
+    where id in (select c_id from plan where id in (select p_id from arrange where  g_id=#{1}))
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.neuedu.service.student;
 import com.neuedu.pojo.Grade;
 import com.neuedu.pojo.Student;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,8 @@ public interface IstudentService {
     int offerCount(int gId);
     int checkIdCard(Student student);
     List<Student> getStudentsByGid(int gId);
+    Student getStudentByGit(String git);
+    List<Student> getStudentWork(int gId,  int wId);
+    Student login(String loginId);
+    int studentcount(int gId);
 }

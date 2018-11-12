@@ -24,6 +24,7 @@
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="g_id" property="gId" jdbcType="INTEGER" />
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -85,7 +86,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, no, git, name, gender, nation, sale, school, specialty, education, qq, address, 
-    email, room_no, cycle, refund, phone, id_card, we_char, status, g_id, is_del
+    email, room_no, cycle, refund, phone, id_card, we_char, status, g_id, is_del,pwd
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.StudentExample" >
     select

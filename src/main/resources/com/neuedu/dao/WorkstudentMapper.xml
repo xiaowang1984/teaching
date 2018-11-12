@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.WorkstudentMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.pojo.Workstudent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="w_id" property="wId" jdbcType="INTEGER" />
+    <result column="dat" property="dat" jdbcType="DATE" />
+    <result column="adds" property="adds" jdbcType="INTEGER" />
+    <result column="dels" property="dels" jdbcType="INTEGER" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="ischeck" property="ischeck" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, s_id, w_id, dat, adds, dels, count, ischeck
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.WorkstudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from workstudent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from workstudent
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from workstudent
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.pojo.WorkstudentExample" >
+    delete from workstudent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.pojo.Workstudent" >
+    insert into workstudent (id, s_id, w_id, 
+      dat, adds, dels, count, 
+      ischeck)
+    values (#{id,jdbcType=INTEGER}, #{sId,jdbcType=INTEGER}, #{wId,jdbcType=INTEGER}, 
+      #{dat,jdbcType=DATE}, #{adds,jdbcType=INTEGER}, #{dels,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, 
+      #{ischeck,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.pojo.Workstudent" >
+    insert into workstudent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="wId != null" >
+        w_id,
+      </if>
+      <if test="dat != null" >
+        dat,
+      </if>
+      <if test="adds != null" >
+        adds,
+      </if>
+      <if test="dels != null" >
+        dels,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="ischeck != null" >
+        ischeck,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="wId != null" >
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="dat != null" >
+        #{dat,jdbcType=DATE},
+      </if>
+      <if test="adds != null" >
+        #{adds,jdbcType=INTEGER},
+      </if>
+      <if test="dels != null" >
+        #{dels,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.pojo.WorkstudentExample" resultType="java.lang.Integer" >
+    select count(*) from workstudent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update workstudent
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sId != null" >
+        s_id = #{record.sId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wId != null" >
+        w_id = #{record.wId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dat != null" >
+        dat = #{record.dat,jdbcType=DATE},
+      </if>
+      <if test="record.adds != null" >
+        adds = #{record.adds,jdbcType=INTEGER},
+      </if>
+      <if test="record.dels != null" >
+        dels = #{record.dels,jdbcType=INTEGER},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.ischeck != null" >
+        ischeck = #{record.ischeck,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update workstudent
+    set id = #{record.id,jdbcType=INTEGER},
+      s_id = #{record.sId,jdbcType=INTEGER},
+      w_id = #{record.wId,jdbcType=INTEGER},
+      dat = #{record.dat,jdbcType=DATE},
+      adds = #{record.adds,jdbcType=INTEGER},
+      dels = #{record.dels,jdbcType=INTEGER},
+      count = #{record.count,jdbcType=INTEGER},
+      ischeck = #{record.ischeck,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.pojo.Workstudent" >
+    update workstudent
+    <set >
+      <if test="sId != null" >
+        s_id = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="wId != null" >
+        w_id = #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="dat != null" >
+        dat = #{dat,jdbcType=DATE},
+      </if>
+      <if test="adds != null" >
+        adds = #{adds,jdbcType=INTEGER},
+      </if>
+      <if test="dels != null" >
+        dels = #{dels,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        ischeck = #{ischeck,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Workstudent" >
+    update workstudent
+    set s_id = #{sId,jdbcType=INTEGER},
+      w_id = #{wId,jdbcType=INTEGER},
+      dat = #{dat,jdbcType=DATE},
+      adds = #{adds,jdbcType=INTEGER},
+      dels = #{dels,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      ischeck = #{ischeck,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="batchload" parameterType="java.util.Date">
+    insert into workstudent(s_id,w_id,dat,adds,dels,count)(select s_id,w_id,dat,sum(additions) adds,sum(deletions) as dels ,count(id) as count from workcommit where dat= #{1,jdbcType=DATE} group by s_id,w_id,dat)
+  </insert>
+  <select id="checkcount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(DISTINCT s_id) from workstudent where w_id=#{1} and ischeck=true
+  </select>
+</mapper>

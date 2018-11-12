@@ -58,4 +58,9 @@ public class CourseServiceImpl implements IcourseService {
         }
         return courses;
     }
+
+    @Override
+    public List<Course> getCourseByGid(int gId) {
+        return courseMapper.getCourseByGid(gId);
+    }
 }
