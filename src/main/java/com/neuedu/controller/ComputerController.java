@@ -34,4 +34,12 @@ public class ComputerController {
     public Computer getComputerById(int id){
         return computerService.getComputerById(id);
     }
+    @PostMapping("/edit")
+    public Message update(Computer computer){
+        return new Message(computerService.update(computer));
+    }
+    @GetMapping("/details")
+    public List<Computer> details(int year,int month,int gId ){
+        return computerService.details(year,month , gId);
+    }
 }

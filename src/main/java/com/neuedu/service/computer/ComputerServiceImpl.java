@@ -1,17 +1,20 @@
 package com.neuedu.service.computer;
 
 import com.github.pagehelper.PageHelper;
+import com.neuedu.core.MyUtils;
 import com.neuedu.dao.ComputerMapper;
 import com.neuedu.pojo.Computer;
 import com.neuedu.pojo.ComputerExample;
+import com.neuedu.pojo.Score;
+import com.neuedu.service.score.IscoreService;
 import com.neuedu.service.storehouse.IstorehouseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ComputerServiceImpl implements IcomputerService {
@@ -19,6 +22,8 @@ public class ComputerServiceImpl implements IcomputerService {
     ComputerMapper computerMapper;
     @Resource
     IstorehouseService storehouseService;
+    @Resource
+    IscoreService scoreService;
     @Override
     public List<Computer> list(Computer computer) {
         ComputerExample storehouseExample = new ComputerExample();
@@ -33,7 +38,13 @@ public class ComputerServiceImpl implements IcomputerService {
             criteria.andGIdEqualTo(computer.getgId());
         if(computer.getWithPage()==1)
             PageHelper.startPage(computer.getPageNo(), computer.getPageSize());
-        return  computerMapper.selectByExampleWithBLOBs(storehouseExample);
+        List<Computer> computers =computerMapper.selectByExampleWithBLOBs(storehouseExample);
+        for(Computer entry : computers){
+            Score score = new Score();
+            score.setcId(entry.getId());
+            entry.setScores(scoreService.list(score));
+        }
+        return  computers;
     }
     @Override
     @Transactional
@@ -46,6 +57,29 @@ public class ComputerServiceImpl implements IcomputerService {
 
     @Override
     public Computer getComputerById(int id) {
-        return computerMapper.selectByPrimaryKey(id);
+        Computer computer =computerMapper.selectByPrimaryKey(id);
+        Score score = new Score();
+        score.setcId(computer.getId());
+        computer.setScores(scoreService.list(score));
+        return computer;
+    }
+
+    @Override
+    public int update(Computer computer) {
+        return computerMapper.updateByPrimaryKeySelective(computer);
+    }
+
+    @Override
+    public List<Computer> details(int year, int month, int gId) {
+        ComputerExample computerExample = new ComputerExample();
+        computerExample.createCriteria().andDatBetween(MyUtils.firstDate(year, month), MyUtils.endDate(year, month)).andGIdEqualTo(gId).andIsDelEqualTo(1);
+        List<Computer> computers = computerMapper.selectByExampleWithBLOBs(computerExample);
+        computerExample.setOrderByClause("dat asc");
+        for(Computer computer : computers){
+            Score score = new Score();
+            score.setcId(computer.getId());
+            computer.setScores(scoreService.list(score));
+        }
+        return computers;
     }
 }

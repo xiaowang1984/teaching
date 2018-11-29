@@ -148,4 +148,14 @@ public class StudentController {
         Student student = (Student) session.getAttribute("user");
         return studentLogService.getLogs(year,month, student.getId());
     }
+    @GetMapping("/getUser")
+    public Student getStudentById(HttpSession session){
+        Student student=(Student)session.getAttribute("user");
+        return studentService.getStudent(student.getId());
+    }
+    @GetMapping("/getLogsByGid")
+    public List<Studentlog> getLogs(Date start,Date end, int gId){
+        return studentLogService.getLogsByGid(start, end, gId);
+
+    }
 }

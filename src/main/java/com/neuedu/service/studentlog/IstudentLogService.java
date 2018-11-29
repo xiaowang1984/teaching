@@ -12,5 +12,5 @@ public interface IstudentLogService {
     Studentlog getStudentLogBySid(Studentlog studentlog);
     int save(Studentlog studentlog,HttpSession session);
     List<Studentlog> getLogs(int year,int month,int sId);
-
+    List<Studentlog> getLogsByGid(Date strt,Date end,int gId);
 }

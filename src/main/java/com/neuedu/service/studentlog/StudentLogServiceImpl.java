@@ -6,10 +6,12 @@ import com.neuedu.pojo.Student;
 import com.neuedu.pojo.StudentExample;
 import com.neuedu.pojo.Studentlog;
 import com.neuedu.pojo.StudentlogExample;
+import com.neuedu.service.student.IstudentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.List;
 public class StudentLogServiceImpl implements IstudentLogService {
     @Resource
     StudentlogMapper studentlogMapper;
+    @Resource
+    IstudentService studentService;
     @Override
     public int add(Studentlog studentlog) {
         return studentlogMapper.insertSelective(studentlog);
@@ -53,15 +57,20 @@ public class StudentLogServiceImpl implements IstudentLogService {
 
     @Override
     public List<Studentlog> getLogs(int year,int month, int sId) {
-        int maxday=MyUtils.maxday(year, month);
-        System.out.println(maxday);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month-1, 1);
-        Date start = calendar.getTime();
-        calendar.set(year, month-1, maxday);
-        Date end = calendar.getTime();
         StudentlogExample studentlogExample = new StudentlogExample();
-        studentlogExample.createCriteria().andDatBetween(start, end).andSidEqualTo(sId);
+        studentlogExample.createCriteria().andDatBetween(MyUtils.firstDate(year, month), MyUtils.endDate(year, month)).andSidEqualTo(sId);
+        return studentlogMapper.selectByExampleWithBLOBs(studentlogExample);
+    }
+
+    @Override
+    public List<Studentlog> getLogsByGid(Date start, Date end, int gId) {
+        List<Student> students = studentService.getStudentsByGid(gId);
+        List<Integer> sids=new ArrayList<>();
+        for (Student stu : students){
+            sids.add(stu.getId());
+        }
+        StudentlogExample studentlogExample = new StudentlogExample();
+        studentlogExample.createCriteria().andDatBetween(start, end).andSidIn(sids);
         return studentlogMapper.selectByExampleWithBLOBs(studentlogExample);
     }
 }

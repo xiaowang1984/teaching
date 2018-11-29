@@ -1,8 +1,11 @@
 package com.neuedu.controller;
 
 import com.neuedu.core.DESUtils;
+import com.neuedu.core.MyUtils;
 import com.neuedu.message.Message;
+import com.neuedu.pojo.Student;
 import com.neuedu.pojo.Teacher;
+import com.neuedu.service.student.IstudentService;
 import com.neuedu.service.teacher.IteacherService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,8 @@ import java.util.Map;
 public class LoginController {
     @Resource
     IteacherService teacherService;
+    @Resource
+    IstudentService studentService;
     @PostMapping("/login")
     public Message getTeachers(Teacher teacherQuery,HttpSession session){
         Teacher teacher=teacherService.login(teacherQuery.getNo());
@@ -50,5 +55,27 @@ public class LoginController {
             }
         }
         return map;
+    }
+
+    @GetMapping("/checkstupwd")
+    public Map<String,String> checkstupwd(String password,HttpSession session){
+        Map<String,String> map=new HashMap<>();
+        Student student = (Student) session.getAttribute("user");
+        Student stu=studentService.getStudent(student.getId());
+        if(student!=null){
+            if(stu.getPwd().equals(DESUtils.getEncryptString(password))){
+                map.put("getdata","true");
+            }
+        }
+        return map;
+    }
+
+    @PostMapping("/changeStuPwd")
+    public Message changeStuPwd(String password,HttpSession session ){
+        Student student = (Student) session.getAttribute("user");
+        Student stu = new Student();
+        stu.setPwd(DESUtils.getEncryptString(password));
+        stu.setId(student.getId());
+        return new Message(studentService.update(stu), "密码修改完成");
     }
 }

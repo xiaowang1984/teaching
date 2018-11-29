@@ -15,10 +15,12 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +81,7 @@ public class WorkController {
     public String gitLoad(@RequestBody Map<String, String> parameterMap) {
         // TODO Auto-generated method stub
         try {
+
             workService.gitLoad(parameterMap);
         }catch (Exception ex){
             File file = new File("/error.txt");
@@ -121,5 +124,10 @@ public class WorkController {
         JSONObject.DEFFAULT_DATE_FORMAT="yyyy-MM-dd";
         return JSONObject.toJSONString(workCommitService.getWorkCommitsByDat(workcommit), SerializerFeature.WriteMapNullValue,SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteDateUseDateFormat,SerializerFeature.PrettyFormat);
+    }
+    @GetMapping("/onework")
+    public List<Work> oneWork(HttpSession session){
+        Student student = (Student) session.getAttribute("user");
+        return workService.getListOne(student.getgId(), student.getId());
     }
 }

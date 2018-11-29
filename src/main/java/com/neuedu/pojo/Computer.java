@@ -1,6 +1,7 @@
 package com.neuedu.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Computer extends Page {
     private Integer id;
@@ -20,6 +21,8 @@ public class Computer extends Page {
     private Integer isDel;
 
     private String description;
+
+    private List<Score> scores;
 
     public Integer getId() {
         return id;
@@ -91,5 +94,13 @@ public class Computer extends Page {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 }

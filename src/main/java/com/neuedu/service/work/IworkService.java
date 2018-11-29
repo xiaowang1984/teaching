@@ -14,4 +14,6 @@ public interface IworkService {
     Work getWorkById(int id);
     Work getWorkByName(String name,int gId);
     void gitLoad(Map<String, String> parameterMap) throws ParseException;
+    List<Work> getListByGid(int gId);
+    List<Work> getListOne(int gId,int sId);
 }

@@ -40,6 +40,8 @@ public class Work extends Page{
 
     private Integer code;
 
+    private List<Workstudent> workstudents;
+
     public Integer getId() {
         return id;
     }
@@ -184,4 +186,11 @@ public class Work extends Page{
         this.code = code;
     }
 
+    public List<Workstudent> getWorkstudents() {
+        return workstudents;
+    }
+
+    public void setWorkstudents(List<Workstudent> workstudents) {
+        this.workstudents = workstudents;
+    }
 }

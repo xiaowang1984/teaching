@@ -20,7 +20,10 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.annotation.Resource;
 import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 import java.nio.charset.Charset;
@@ -29,7 +32,7 @@ import java.util.Date;
 import java.util.List;
 
 @Configuration
-public class Config {
+public class Config extends WebMvcConfigurerAdapter {
     /**
      *
      * 配置文件上传
@@ -120,5 +123,10 @@ public class Config {
     @Bean
     public Converter<String,Date> getConverter(){
         return new DateConvert();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/student/login");
     }
 }

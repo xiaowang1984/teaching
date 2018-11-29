@@ -7,6 +7,7 @@ import com.neuedu.pojo.*;
 import com.neuedu.service.student.IstudentService;
 import com.neuedu.service.workCommit.IworkCommitService;
 import com.neuedu.service.workdetails.IworkDetailsService;
+import com.neuedu.service.workstudent.IworkstudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,8 @@ public class WorkServiceImpl implements IworkService{
     IstudentService studentService;
     @Resource
     IworkDetailsService workDetailsService;
+    @Resource
+    IworkstudentService workstudentService;
     @Override
     public List<Work> list(Work work,Date dat) {
         WorkExample workExample = new WorkExample();
@@ -120,5 +123,22 @@ public class WorkServiceImpl implements IworkService{
                     }
                 }
         }
+    }
+
+    @Override
+    public List<Work> getListByGid(int gId) {
+        WorkExample workExample = new WorkExample();
+        workExample.createCriteria().andGidEqualTo(gId).andIsDelEqualTo(1);
+        return workMapper.selectByExampleWithBLOBs(workExample);
+    }
+
+    @Override
+    public List<Work> getListOne(int gId, int sId) {
+        List<Work> list = getListByGid(gId);
+        for (Work work : list){
+            List<Workstudent> workstudents = workstudentService.list(work.getId(), sId);
+            work.setWorkstudents(workstudents);
+        }
+        return list;
     }
 }

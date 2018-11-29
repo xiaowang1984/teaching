@@ -8,6 +8,9 @@ import org.csource.fastdfs.TrackerServer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class MyUtils {
     public static String fileUpload(MultipartFile multipartFile) throws Exception {
         String result="";
@@ -34,5 +37,16 @@ public class MyUtils {
         }else{
             return 28;
         }
+    }
+    public static Date firstDate(int year, int month){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month-1, 1);
+        return calendar.getTime();
+    }
+    public static Date endDate(int year,int month){
+        int maxday=MyUtils.maxday(year, month);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month-1, maxday);
+        return calendar.getTime();
     }
 }
