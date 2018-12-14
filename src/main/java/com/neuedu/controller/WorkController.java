@@ -84,7 +84,7 @@ public class WorkController {
                 stringBuilder.append(str+"====="+parameterMap.get(str)+"\n");
             }
             System.out.println("git==="+stringBuilder.toString());
-            FileUtils.writeStringToFile(file,stringBuilder.toString() );
+            FileUtils.writeStringToFile(file,"git==="+stringBuilder.toString() );
             workService.gitLoad(parameterMap);
         }catch (Exception ex){
             File file = new File("/error.txt");
