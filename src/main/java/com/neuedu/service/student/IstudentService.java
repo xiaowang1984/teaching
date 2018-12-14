@@ -22,4 +22,5 @@ public interface IstudentService {
     List<Student> getStudentWork(int gId,  int wId);
     Student login(String loginId);
     int studentcount(int gId);
+    int changepwd(Student student);
 }

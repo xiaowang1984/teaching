@@ -1,6 +1,7 @@
 package com.neuedu.controller;
 
 import com.neuedu.core.DESUtils;
+import com.neuedu.core.MyUtils;
 import com.neuedu.message.Message;
 import com.neuedu.pojo.Grade;
 import com.neuedu.pojo.Student;
@@ -154,8 +155,17 @@ public class StudentController {
         return studentService.getStudent(student.getId());
     }
     @GetMapping("/getLogsByGid")
-    public List<Studentlog> getLogs(Date start,Date end, int gId){
+    public List<Student> getLogs(Date start,Date end, int gId){
         return studentLogService.getLogsByGid(start, end, gId);
-
+    }
+    @PostMapping("/upimg")
+    public Message upimg(MultipartFile upfile,Student student) throws Exception {
+       String img= MyUtils.fileUpload(upfile);
+       student.setImg(img);
+       return new Message(studentService.update(student) );
+    }
+    @PostMapping("/pwd")
+    public Message changepwd(Student student){
+        return new Message(studentService.changepwd(student));
     }
 }

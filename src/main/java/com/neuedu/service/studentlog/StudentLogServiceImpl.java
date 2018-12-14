@@ -63,14 +63,14 @@ public class StudentLogServiceImpl implements IstudentLogService {
     }
 
     @Override
-    public List<Studentlog> getLogsByGid(Date start, Date end, int gId) {
+    public List<Student> getLogsByGid(Date start, Date end, int gId) {
         List<Student> students = studentService.getStudentsByGid(gId);
-        List<Integer> sids=new ArrayList<>();
         for (Student stu : students){
-            sids.add(stu.getId());
+            StudentlogExample studentlogExample = new StudentlogExample();
+            studentlogExample.createCriteria().andDatBetween(start, end).andSidEqualTo(stu.getId());
+            stu.setStudentlogs(studentlogMapper.selectByExampleWithBLOBs(studentlogExample));
         }
-        StudentlogExample studentlogExample = new StudentlogExample();
-        studentlogExample.createCriteria().andDatBetween(start, end).andSidIn(sids);
-        return studentlogMapper.selectByExampleWithBLOBs(studentlogExample);
+
+        return students;
     }
 }

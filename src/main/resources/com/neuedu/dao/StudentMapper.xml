@@ -26,6 +26,10 @@
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
     <result column="pwd" property="pwd" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.neuedu.pojo.Student" extends="BaseResultMap" >
+    <result column="img" property="img" jdbcType="LONGVARCHAR" />
+    <result column="mark" property="mark" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -86,8 +90,27 @@
   </sql>
   <sql id="Base_Column_List" >
     id, no, git, name, gender, nation, sale, school, specialty, education, qq, address, 
-    email, room_no, cycle, refund, phone, id_card, we_char, status, g_id, is_del,pwd
+    email, room_no, cycle, refund, phone, id_card, we_char, status, g_id, is_del, pwd
   </sql>
+  <sql id="Blob_Column_List" >
+    img, mark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.neuedu.pojo.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.StudentExample" >
     select
     <if test="distinct" >
@@ -102,9 +125,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -126,7 +151,8 @@
       email, room_no, cycle, 
       refund, phone, id_card, 
       we_char, status, g_id, 
-      is_del)
+      is_del, pwd, img, 
+      mark)
     values (#{id,jdbcType=INTEGER}, #{no,jdbcType=INTEGER}, #{git,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, 
       #{sale,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
@@ -134,7 +160,8 @@
       #{email,jdbcType=VARCHAR}, #{roomNo,jdbcType=VARCHAR}, #{cycle,jdbcType=VARCHAR}, 
       #{refund,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
       #{weChar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, 
-      #{isDel,jdbcType=INTEGER})
+      #{isDel,jdbcType=INTEGER}, #{pwd,jdbcType=VARCHAR}, #{img,jdbcType=LONGVARCHAR}, 
+      #{mark,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.neuedu.pojo.Student" >
     insert into student
@@ -208,6 +235,12 @@
       <if test="pwd != null" >
         pwd,
       </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -279,28 +312,13 @@
       <if test="pwd != null" >
         #{pwd,jdbcType=VARCHAR},
       </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
-  </insert>
-  <insert id="insertBatch" parameterType="java.util.List">
-    insert into student ( no, git,
-      name, gender, nation,
-      sale, school, specialty,
-      education, qq, address,
-      email, room_no, cycle,
-      refund, phone, id_card,
-      we_char, status, g_id,
-      is_del)
-    values
-    <foreach collection="list" item="student" separator=",">
-      (#{student.no,jdbcType=INTEGER}, #{student.git,jdbcType=VARCHAR},
-      #{student.name,jdbcType=VARCHAR}, #{student.gender,jdbcType=INTEGER}, #{student.nation,jdbcType=VARCHAR},
-      #{student.sale,jdbcType=VARCHAR}, #{student.school,jdbcType=VARCHAR}, #{student.specialty,jdbcType=VARCHAR},
-      #{student.education,jdbcType=VARCHAR}, #{student.qq,jdbcType=VARCHAR}, #{student.address,jdbcType=VARCHAR},
-      #{student.email,jdbcType=VARCHAR}, #{student.roomNo,jdbcType=VARCHAR}, #{student.cycle,jdbcType=VARCHAR},
-      #{student.refund,jdbcType=INTEGER}, #{student.phone,jdbcType=VARCHAR}, #{student.idCard,jdbcType=VARCHAR},
-      #{student.weChar,jdbcType=VARCHAR}, #{student.status,jdbcType=INTEGER}, #{student.gId,jdbcType=INTEGER},
-      #{student.isDel,jdbcType=INTEGER})
-    </foreach>
   </insert>
   <select id="countByExample" parameterType="com.neuedu.pojo.StudentExample" resultType="java.lang.Integer" >
     select count(*) from student
@@ -377,7 +395,47 @@
       <if test="record.isDel != null" >
         is_del = #{record.isDel,jdbcType=INTEGER},
       </if>
+      <if test="record.pwd != null" >
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.mark != null" >
+        mark = #{record.mark,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update student
+    set id = #{record.id,jdbcType=INTEGER},
+      no = #{record.no,jdbcType=INTEGER},
+      git = #{record.git,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      sale = #{record.sale,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      specialty = #{record.specialty,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      room_no = #{record.roomNo,jdbcType=VARCHAR},
+      cycle = #{record.cycle,jdbcType=VARCHAR},
+      refund = #{record.refund,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      we_char = #{record.weChar,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      g_id = #{record.gId,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=LONGVARCHAR},
+      mark = #{record.mark,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -405,7 +463,8 @@
       we_char = #{record.weChar,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       g_id = #{record.gId,jdbcType=INTEGER},
-      is_del = #{record.isDel,jdbcType=INTEGER}
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      pwd = #{record.pwd,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -479,7 +538,41 @@
       <if test="pwd != null" >
         pwd = #{pwd,jdbcType=VARCHAR},
       </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neuedu.pojo.Student" >
+    update student
+    set no = #{no,jdbcType=INTEGER},
+      git = #{git,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      sale = #{sale,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      room_no = #{roomNo,jdbcType=VARCHAR},
+      cycle = #{cycle,jdbcType=VARCHAR},
+      refund = #{refund,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      we_char = #{weChar,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      g_id = #{gId,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      img = #{img,jdbcType=LONGVARCHAR},
+      mark = #{mark,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Student" >
@@ -504,7 +597,8 @@
       we_char = #{weChar,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       g_id = #{gId,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER}
+      is_del = #{isDel,jdbcType=INTEGER},
+      pwd = #{pwd,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

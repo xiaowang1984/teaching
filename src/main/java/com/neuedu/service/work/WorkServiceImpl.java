@@ -7,6 +7,7 @@ import com.neuedu.pojo.*;
 import com.neuedu.service.student.IstudentService;
 import com.neuedu.service.workCommit.IworkCommitService;
 import com.neuedu.service.workdetails.IworkDetailsService;
+import com.neuedu.service.workgrade.IworkGradeService;
 import com.neuedu.service.workstudent.IworkstudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,8 @@ public class WorkServiceImpl implements IworkService{
     IworkDetailsService workDetailsService;
     @Resource
     IworkstudentService workstudentService;
+    @Resource
+    IworkGradeService workGradeService;
     @Override
     public List<Work> list(Work work,Date dat) {
         WorkExample workExample = new WorkExample();
@@ -137,6 +140,7 @@ public class WorkServiceImpl implements IworkService{
         List<Work> list = getListByGid(gId);
         for (Work work : list){
             List<Workstudent> workstudents = workstudentService.list(work.getId(), sId);
+            work.setWorkgrade(workGradeService.list(work.getId()));
             work.setWorkstudents(workstudents);
         }
         return list;

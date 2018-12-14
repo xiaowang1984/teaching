@@ -20,11 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 
 @RestController
@@ -81,7 +77,14 @@ public class WorkController {
     public String gitLoad(@RequestBody Map<String, String> parameterMap) {
         // TODO Auto-generated method stub
         try {
-
+            File file=new File("/git.txt");
+            StringBuilder stringBuilder = new StringBuilder();
+            Set<String> strings = parameterMap.keySet();
+            for (String str:strings) {
+                stringBuilder.append(str+"====="+parameterMap.get(str)+"\n");
+            }
+            System.out.println("git==="+stringBuilder.toString());
+            FileUtils.writeStringToFile(file,stringBuilder.toString() );
             workService.gitLoad(parameterMap);
         }catch (Exception ex){
             File file = new File("/error.txt");

@@ -47,9 +47,23 @@ public class Student {
 
     private Integer isDel;
 
+    private String pwd;
+
+    private String img;
+
+    private String mark;
+
     private List<Workstudent> works;
 
-    private String pwd;
+    private List<Studentlog> studentlogs;
+
+    public List<Workstudent> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<Workstudent> works) {
+        this.works = works;
+    }
 
     public Integer getId() {
         return id;
@@ -227,19 +241,35 @@ public class Student {
         this.isDel = isDel;
     }
 
-    public List<Workstudent> getWorks() {
-        return works;
-    }
-
-    public void setWorks(List<Workstudent> works) {
-        this.works = works;
-    }
-
     public String getPwd() {
         return pwd;
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd==null?null:pwd.trim();
+        this.pwd = pwd == null ? null : pwd.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark == null ? null : mark.trim();
+    }
+
+    public List<Studentlog> getStudentlogs() {
+        return studentlogs;
+    }
+
+    public void setStudentlogs(List<Studentlog> studentlogs) {
+        this.studentlogs = studentlogs;
     }
 }

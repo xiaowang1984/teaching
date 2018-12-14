@@ -1,5 +1,6 @@
 package com.neuedu.service.student;
 
+import com.neuedu.core.DESUtils;
 import com.neuedu.dao.StudentMapper;
 import com.neuedu.pojo.Grade;
 import com.neuedu.pojo.GradeExample;
@@ -148,6 +149,12 @@ public class StudentServiceImpl implements IstudentService {
         StudentExample studentExample = new StudentExample();
         studentExample.createCriteria().andGIdEqualTo(gId).andIsDelEqualTo(1).andStatusEqualTo(1);
         return studentMapper.countByExample(studentExample);
+    }
+
+    @Override
+    public int changepwd(Student student) {
+        student.setPwd(DESUtils.getEncryptString(student.getPwd()));
+        return update(student);
     }
 
 }

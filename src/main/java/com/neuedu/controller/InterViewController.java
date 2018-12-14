@@ -1,6 +1,5 @@
 package com.neuedu.controller;
 
-import com.neuedu.dao.InterviewMapper;
 import com.neuedu.message.Message;
 import com.neuedu.pojo.Interview;
 import com.neuedu.pojo.InterviewDetails;
