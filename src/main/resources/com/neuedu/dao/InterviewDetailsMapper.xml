@@ -284,4 +284,13 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="avgexam" resultType="java.util.Map" parameterType="java.lang.Integer">
+    select avg(skill) as avgskill,avg(express) as avgexpress from interview_details where i_id=#{1} and is_del=1 GROUP BY i_id
+  </select>
+  <select id="avgbySid" resultType="java.util.Map" parameterType="java.lang.Integer">
+    select avg(skill) as avgskill ,avg(express) as avgexpress from interview_details where s_id=#{sId} and is_del=1
+  </select>
+  <select id="avggrade" resultType="java.util.Map" parameterType="java.lang.Integer">
+    select avg(skill) as avgskill ,avg(express) as avgexpress from interview_details where i_id in (select i_id from interview_details where s_id=#{sId}) and is_del=1
+  </select>
 </mapper>

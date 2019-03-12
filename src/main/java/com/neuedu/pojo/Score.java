@@ -1,5 +1,7 @@
 package com.neuedu.pojo;
 
+import java.math.BigDecimal;
+
 public class Score {
     private Integer id;
 
@@ -12,6 +14,26 @@ public class Score {
     private Integer isDel;
 
     private String mark;
+
+    private Computer computer;
+
+    private BigDecimal avg;
+
+    public BigDecimal getAvg() {
+        return avg;
+    }
+
+    public void setAvg(BigDecimal avg) {
+        this.avg = avg;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
+    }
 
     public Integer getId() {
         return id;

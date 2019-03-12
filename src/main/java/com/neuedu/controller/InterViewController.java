@@ -3,6 +3,7 @@ package com.neuedu.controller;
 import com.neuedu.message.Message;
 import com.neuedu.pojo.Interview;
 import com.neuedu.pojo.InterviewDetails;
+import com.neuedu.pojo.Student;
 import com.neuedu.service.interview.InterviewService;
 import com.neuedu.service.interviewDetails.InterviewDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -36,5 +38,11 @@ public class InterViewController {
     @PostMapping("/update")
     public Message update(Interview interview){
         return new Message(interviewService.update(interview));
+    }
+
+    @GetMapping("/stuinterview")
+    public List<InterviewDetails> stuinterview(HttpSession session){
+        Student student = (Student)session.getAttribute("user");
+        return interviewDetailsService.getInterviewDetailsBySid(student.getId());
     }
 }

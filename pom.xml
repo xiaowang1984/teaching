@@ -19,6 +19,7 @@
         <poi.version>3.14</poi.version>
         <fileupload.version>1.3.1</fileupload.version>
         <guawa.version>25.1-jre</guawa.version>
+        <dozer.version>5.5.1</dozer.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -122,7 +123,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-      </dependencies>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>${dozer.version}</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>

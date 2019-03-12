@@ -1,5 +1,7 @@
 package com.neuedu.pojo;
 
+import java.math.BigDecimal;
+
 public class InterviewDetails {
     private Integer id;
 
@@ -14,6 +16,36 @@ public class InterviewDetails {
     private Integer isDel;
 
     private String mark;
+
+    private Interview interview;
+
+    private BigDecimal avgskill;
+
+    private BigDecimal avgexpress;
+
+    public BigDecimal getAvgskill() {
+        return avgskill;
+    }
+
+    public void setAvgskill(BigDecimal avgskill) {
+        this.avgskill = avgskill;
+    }
+
+    public BigDecimal getAvgexpress() {
+        return avgexpress;
+    }
+
+    public void setAvgexpress(BigDecimal avgexpress) {
+        this.avgexpress = avgexpress;
+    }
+
+    public Interview getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Interview interview) {
+        this.interview = interview;
+    }
 
     public Integer getId() {
         return id;

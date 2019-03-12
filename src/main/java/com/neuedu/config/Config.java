@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.neuedu.core.DateConvert;
 import com.neuedu.core.EncryptPropertyPlaceholderConfigurer;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -129,4 +130,10 @@ public class Config extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/student/login","/work/git");
     }
+    @Bean
+    public DozerBeanMapper mapper() {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        return mapper;
+    }
+
 }

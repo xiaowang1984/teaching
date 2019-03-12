@@ -19,4 +19,9 @@ public class TalkServiceImpl implements ItalkService {
         talkExample.createCriteria().andSIdEqualTo(talk.getsId());
         return talkMapper.selectByExampleWithBLOBs(talkExample);
     }
+
+    @Override
+    public List<Talk> getReport(Integer gId) {
+        return talkMapper.getReport(gId);
+    }
 }

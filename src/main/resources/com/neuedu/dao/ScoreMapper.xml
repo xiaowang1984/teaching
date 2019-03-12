@@ -267,4 +267,14 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="avgByCid" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+    select avg(skill) as avg from score where c_id=#{1} and is_del=1 GROUP BY c_id
+  </select>
+  <select id="avgbySid" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+    select avg(skill) from score where s_id=#{sId} and is_del=1
+  </select>
+  <select id="avggrade" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+    select avg(skill) from score where c_id in (select c_id from score where s_id=#{sId}) and is_del=1
+  </select>
+
 </mapper>

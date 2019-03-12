@@ -17,10 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
 @Service
 public class WorkServiceImpl implements IworkService{
@@ -94,35 +91,40 @@ public class WorkServiceImpl implements IworkService{
             if(student != null){
                 Work work = getWorkByName(name, student.getgId());
                 if(work != null){
-                    RestTemplate template = new RestTemplate();
-                    String url="https://api.github.com/repos/"+user+"/"+name+"/commits/"+commitid;
-                    String str = template.getForObject(url, String.class);
-                    Map<String,Object> map = JSONObject.parseObject(str, Map.class);
-                    Map<String,Integer> stats=JSONObject.parseObject(map.get("stats").toString(), Map.class);
-                    Map<String,Object> commit=JSONObject.parseObject(map.get("commit").toString(), Map.class);
-                    Map<String,String> author= JSONObject.parseObject(commit.get("author").toString(), Map.class);
-                    List<Map<String,Object>> files = (List<Map<String, Object>>) map.get("files");
-                    Workcommit workcommit = new Workcommit();
-                    workcommit.setAdditions(stats.get("additions"));
-                    workcommit.setDeletions(stats.get("deletions"));
-                    workcommit.setMessage(commit.get("message").toString());
-                    String dat=author.get("date");
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                    sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                    Date dateTime =sdf.parse(dat);
-                    workcommit.setDat(dateTime);
-                    workcommit.setTim(dateTime);
-                    workcommit.setsId(student.getId());
-                    workcommit.setwId(work.getId());
-                    workCommitService.add(workcommit);
-                    for(Map<String,Object> file : files){
-                        Workdetails workdetails = new Workdetails();
-                        workdetails.setcId(workcommit.getId());
-                        workdetails.setFile(file.get("filename").toString());
-                        workdetails.setStatus(file.get("status").toString());
-                        workdetails.setAdditions(Integer.parseInt(file.get("additions").toString()));
-                        workdetails.setDeletions(Integer.parseInt(file.get("deletions").toString()));
-                        workDetailsService.add(workdetails);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(work.getEndDat());
+                    calendar.add(Calendar.DATE, 7);
+                    if(calendar.getTime().getTime()>new Date().getTime()) {
+                        RestTemplate template = new RestTemplate();
+                        String url = "https://api.github.com/repos/" + user + "/" + name + "/commits/" + commitid;
+                        String str = template.getForObject(url, String.class);
+                        Map<String, Object> map = JSONObject.parseObject(str, Map.class);
+                        Map<String, Integer> stats = JSONObject.parseObject(map.get("stats").toString(), Map.class);
+                        Map<String, Object> commit = JSONObject.parseObject(map.get("commit").toString(), Map.class);
+                        Map<String, String> author = JSONObject.parseObject(commit.get("author").toString(), Map.class);
+                        List<Map<String, Object>> files = (List<Map<String, Object>>) map.get("files");
+                        Workcommit workcommit = new Workcommit();
+                        workcommit.setAdditions(stats.get("additions"));
+                        workcommit.setDeletions(stats.get("deletions"));
+                        workcommit.setMessage(commit.get("message").toString());
+                        String dat = author.get("date");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                        Date dateTime = sdf.parse(dat);
+                        workcommit.setDat(dateTime);
+                        workcommit.setTim(dateTime);
+                        workcommit.setsId(student.getId());
+                        workcommit.setwId(work.getId());
+                        workCommitService.add(workcommit);
+                        for (Map<String, Object> file : files) {
+                            Workdetails workdetails = new Workdetails();
+                            workdetails.setcId(workcommit.getId());
+                            workdetails.setFile(file.get("filename").toString());
+                            workdetails.setStatus(file.get("status").toString());
+                            workdetails.setAdditions(Integer.parseInt(file.get("additions").toString()));
+                            workdetails.setDeletions(Integer.parseInt(file.get("deletions").toString()));
+                            workDetailsService.add(workdetails);
+                        }
                     }
                 }
         }
@@ -144,5 +146,12 @@ public class WorkServiceImpl implements IworkService{
             work.setWorkstudents(workstudents);
         }
         return list;
+    }
+
+    @Override
+    public int count(Integer gId) {
+        WorkExample workExample = new WorkExample();
+        workExample.createCriteria().andGidEqualTo(gId).andIsDelEqualTo(1);
+        return workMapper.countByExample(workExample);
     }
 }

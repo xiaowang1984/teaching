@@ -33,4 +33,6 @@ public interface StudentlogMapper {
     int updateByPrimaryKeyWithBLOBs(Studentlog record);
 
     int updateByPrimaryKey(Studentlog record);
+
+    int getListByGid(Integer gid);
 }

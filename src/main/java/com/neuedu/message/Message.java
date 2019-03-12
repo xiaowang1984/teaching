@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Message {
     public Message(){}
-    public Message(Integer code,String message) {
+    public Message(Integer code,Object message) {
         this.code = code;
         this.message = message;
     }
@@ -14,5 +14,5 @@ public class Message {
         this.message = code==0?"保存失败":"保存成功";
     }
     private Integer code;
-    private String message;
+    private Object message;
 }

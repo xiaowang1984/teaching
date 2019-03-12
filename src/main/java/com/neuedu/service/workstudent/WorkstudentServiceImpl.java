@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class WorkstudentServiceImpl implements IworkstudentService{
@@ -56,5 +54,28 @@ public class WorkstudentServiceImpl implements IworkstudentService{
     @Override
     public int checkcount(int wId) {
         return workstudentMapper.checkcount(wId);
+    }
+
+    @Override
+    public List<Date> getDatesBySid(Integer sId) {
+        return workstudentMapper.getDatesBySid(sId);
+    }
+
+    @Override
+    public List<Map<String, Object>> getStuCode(Integer sId,List<Date> dates) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("sid", sId);
+        params.put("dates", dates);
+        return workstudentMapper.getStuCode(params);
+    }
+
+    @Override
+    public List<Workstudent> donecount(Integer sId) {
+        return workstudentMapper.donecount(sId);
+    }
+
+    @Override
+    public int sumbystu(Integer sId) {
+        return workstudentMapper.sumbystu(sId);
     }
 }

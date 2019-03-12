@@ -301,4 +301,7 @@
       dat = #{dat,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getReport" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select a.g_id,a.s_id,a.assess,a.dat from talk as a where a.is_del=1 and a.dat=(select max(dat) from talk where s_id=a.s_id) and a.s_id in (select id from student where g_id=#{gId});;
+  </select>
 </mapper>

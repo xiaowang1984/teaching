@@ -82,4 +82,9 @@ public class ComputerServiceImpl implements IcomputerService {
         }
         return computers;
     }
+
+    @Override
+    public int countByStudent(Integer sId) {
+        return scoreService.countByStudent(sId);
+    }
 }

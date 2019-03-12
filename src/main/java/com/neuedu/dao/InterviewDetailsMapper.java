@@ -2,7 +2,11 @@ package com.neuedu.dao;
 
 import com.neuedu.pojo.InterviewDetails;
 import com.neuedu.pojo.InterviewDetailsExample;
+
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface InterviewDetailsMapper {
@@ -33,4 +37,10 @@ public interface InterviewDetailsMapper {
     int updateByPrimaryKeyWithBLOBs(InterviewDetails record);
 
     int updateByPrimaryKey(InterviewDetails record);
+
+    Map<String,BigDecimal> avgexam(Integer id);
+
+    Map<String,BigDecimal> avgbySid(Integer sId);
+
+    Map<String,BigDecimal> avggrade(Integer sId);
 }

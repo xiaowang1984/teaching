@@ -331,4 +331,7 @@
       managercode = #{managercode,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getListByGid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select avg(moodcode) from studentlog where sid in (select id from student where g_id=#{gid} and is_del=1 and status=1)
+  </select>
 </mapper>

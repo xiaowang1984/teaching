@@ -261,4 +261,19 @@
   <select id="checkcount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select count(DISTINCT s_id) from workstudent where w_id=#{1} and ischeck=true
   </select>
+  <select id="getDatesBySid" resultType="java.util.Date" parameterType="java.lang.Integer">
+    select distinct dat from workstudent where s_id=#{sId} order by dat desc limit 11
+  </select>
+  <select id="getStuCode" resultType="java.util.Map" parameterType="java.util.Map">
+    select (sum(a.adds)-sum(a.dels)) as code,a.dat,(select (sum(adds)-sum(dels))/sum(stucount) from workgrade where dat=a.dat and w_id in(select w_id from workstudent where s_id=#{sid} and dat=a.dat)) as avgcode from workstudent as a where a.s_id=#{sid} and a.dat in
+    (<foreach collection="dates" item="d" separator=",">#{d}</foreach>) group by a.dat order by a.dat desc
+  </select>
+  <select id="donecount" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from  workstudent where s_id=#{sId} and  ischeck=1 GROUP BY  s_id,w_id
+  </select>
+  <select id="sumbystu" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select (sum(adds)-sum(dels)) as sum from  workstudent where s_id=#{sId}
+  </select>
 </mapper>

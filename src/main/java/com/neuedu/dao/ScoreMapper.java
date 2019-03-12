@@ -2,6 +2,8 @@ package com.neuedu.dao;
 
 import com.neuedu.pojo.Score;
 import com.neuedu.pojo.ScoreExample;
+
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,4 +35,10 @@ public interface ScoreMapper {
     int updateByPrimaryKeyWithBLOBs(Score record);
 
     int updateByPrimaryKey(Score record);
+
+    BigDecimal avgByCid(Integer cId);
+
+    BigDecimal avgbySid(Integer sId);
+
+    BigDecimal avggrade(Integer sId);
 }

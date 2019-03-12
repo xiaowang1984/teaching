@@ -16,4 +16,5 @@ public interface IworkService {
     void gitLoad(Map<String, String> parameterMap) throws ParseException;
     List<Work> getListByGid(int gId);
     List<Work> getListOne(int gId,int sId);
+    int count(Integer gId);
 }

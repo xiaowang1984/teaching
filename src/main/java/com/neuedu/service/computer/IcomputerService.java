@@ -10,4 +10,5 @@ public interface IcomputerService {
     Computer getComputerById(int id);
     int update(Computer computer);
     List<Computer> details(int year,int month,int gId);
+    int countByStudent(Integer sId);
 }

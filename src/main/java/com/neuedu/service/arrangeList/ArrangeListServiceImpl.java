@@ -75,5 +75,15 @@ public class ArrangeListServiceImpl implements IarrangeListService {
         return arrangeListMapper.logsByGid(gId);
     }
 
+    @Override
+    public ArrangeList getArrangeListById(Integer id) {
+        return arrangeListMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int edit(ArrangeListWithBLOBs arrangeList) {
+        return arrangeListMapper.updateByPrimaryKeySelective(arrangeList);
+    }
+
 
 }

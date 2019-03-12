@@ -73,4 +73,16 @@ public class StudentLogServiceImpl implements IstudentLogService {
 
         return students;
     }
+
+    @Override
+    public List<Studentlog> getLogsBySid(Integer sId) {
+        StudentlogExample studentlogExample = new StudentlogExample();
+        studentlogExample.createCriteria().andSidEqualTo(sId);
+        return studentlogMapper.selectByExample(studentlogExample);
+    }
+
+    @Override
+    public int getListByGid(Integer gid) {
+        return studentlogMapper.getListByGid(gid);
+    }
 }

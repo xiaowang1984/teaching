@@ -3,6 +3,8 @@ package com.neuedu.dao;
 import com.neuedu.pojo.Interview;
 import com.neuedu.pojo.InterviewExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface InterviewMapper {
@@ -33,4 +35,6 @@ public interface InterviewMapper {
     int updateByPrimaryKeyWithBLOBs(Interview record);
 
     int updateByPrimaryKey(Interview record);
+
+
 }

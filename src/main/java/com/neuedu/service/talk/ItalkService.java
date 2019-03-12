@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ItalkService {
     List<Talk> getDetails(Talk talk);
+    List<Talk> getReport(Integer gId);
 }

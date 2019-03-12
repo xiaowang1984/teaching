@@ -5,6 +5,8 @@ import com.neuedu.pojo.WorkstudentExample;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface WorkstudentMapper {
@@ -33,4 +35,12 @@ public interface WorkstudentMapper {
     int batchload(Date date);
 
     int checkcount(int wId);
+
+    List<Date> getDatesBySid(Integer sId);
+
+    List<Map<String,Object>> getStuCode(Map<String,Object> params);
+
+    List<Workstudent> donecount(Integer sId);
+
+    int sumbystu(Integer sId);
 }

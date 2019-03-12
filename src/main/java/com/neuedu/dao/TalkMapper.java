@@ -33,4 +33,6 @@ public interface TalkMapper {
     int updateByPrimaryKeyWithBLOBs(Talk record);
 
     int updateByPrimaryKey(Talk record);
+
+    List<Talk> getReport(Integer gId);
 }
