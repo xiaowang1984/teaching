@@ -60,7 +60,7 @@ public class DESUtils {
 
 	}
 	public static void main(String[] args) {
-		System.out.println(getEncryptString("1234567"));
+		System.out.println(getDecryptString("NedEBGKcD+ZrZ1PwRDjIRA=="));
 	}
 	
 }
