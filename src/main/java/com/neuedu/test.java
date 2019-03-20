@@ -17,7 +17,8 @@ public class test {
     @Resource
     IworkstudentService workstudentService;
     public static void main(String[] args) throws ParseException {
-
+        double a = 2.4;
+        System.out.println(a);
     }
     @Test
     public void handler(){

@@ -128,7 +128,7 @@ public class Config extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/student/login","/work/git");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/student/login","/work/**");
     }
     @Bean
     public DozerBeanMapper mapper() {
