@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.pojo.Student" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="no" property="no" jdbcType="INTEGER" />
+    <result column="git" property="git" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="sale" property="sale" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="room_no" property="roomNo" jdbcType="VARCHAR" />
+    <result column="cycle" property="cycle" jdbcType="VARCHAR" />
+    <result column="refund" property="refund" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="we_char" property="weChar" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="g_id" property="gId" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.neuedu.pojo.Student" extends="BaseResultMap" >
+    <result column="img" property="img" jdbcType="LONGVARCHAR" />
+    <result column="mark" property="mark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, no, git, name, gender, nation, sale, school, specialty, education, qq, address, 
+    email, room_no, cycle, refund, phone, id_card, we_char, status, g_id, is_del, pwd
+  </sql>
+  <sql id="Blob_Column_List" >
+    img, mark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.neuedu.pojo.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.pojo.StudentExample" >
+    delete from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.pojo.Student" >
+    insert into student (id, no, git, 
+      name, gender, nation, 
+      sale, school, specialty, 
+      education, qq, address, 
+      email, room_no, cycle, 
+      refund, phone, id_card, 
+      we_char, status, g_id, 
+      is_del, pwd, img, 
+      mark)
+    values (#{id,jdbcType=INTEGER}, #{no,jdbcType=INTEGER}, #{git,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, 
+      #{sale,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{roomNo,jdbcType=VARCHAR}, #{cycle,jdbcType=VARCHAR}, 
+      #{refund,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{weChar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, 
+      #{isDel,jdbcType=INTEGER}, #{pwd,jdbcType=VARCHAR}, #{img,jdbcType=LONGVARCHAR}, 
+      #{mark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.pojo.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="git != null" >
+        git,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="sale != null" >
+        sale,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="specialty != null" >
+        specialty,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="roomNo != null" >
+        room_no,
+      </if>
+      <if test="cycle != null" >
+        cycle,
+      </if>
+      <if test="refund != null" >
+        refund,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="weChar != null" >
+        we_char,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gId != null" >
+        g_id,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=INTEGER},
+      </if>
+      <if test="git != null" >
+        #{git,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="sale != null" >
+        #{sale,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNo != null" >
+        #{roomNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="refund != null" >
+        #{refund,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="weChar != null" >
+        #{weChar,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gId != null" >
+        #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.pojo.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update student
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=INTEGER},
+      </if>
+      <if test="record.git != null" >
+        git = #{record.git,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sale != null" >
+        sale = #{record.sale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialty != null" >
+        specialty = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomNo != null" >
+        room_no = #{record.roomNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cycle != null" >
+        cycle = #{record.cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refund != null" >
+        refund = #{record.refund,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weChar != null" >
+        we_char = #{record.weChar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.gId != null" >
+        g_id = #{record.gId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.pwd != null" >
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.mark != null" >
+        mark = #{record.mark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update student
+    set id = #{record.id,jdbcType=INTEGER},
+      no = #{record.no,jdbcType=INTEGER},
+      git = #{record.git,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      sale = #{record.sale,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      specialty = #{record.specialty,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      room_no = #{record.roomNo,jdbcType=VARCHAR},
+      cycle = #{record.cycle,jdbcType=VARCHAR},
+      refund = #{record.refund,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      we_char = #{record.weChar,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      g_id = #{record.gId,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=LONGVARCHAR},
+      mark = #{record.mark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update student
+    set id = #{record.id,jdbcType=INTEGER},
+      no = #{record.no,jdbcType=INTEGER},
+      git = #{record.git,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      sale = #{record.sale,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      specialty = #{record.specialty,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      room_no = #{record.roomNo,jdbcType=VARCHAR},
+      cycle = #{record.cycle,jdbcType=VARCHAR},
+      refund = #{record.refund,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      we_char = #{record.weChar,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      g_id = #{record.gId,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      pwd = #{record.pwd,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.pojo.Student" >
+    update student
+    <set >
+      <if test="no != null" >
+        no = #{no,jdbcType=INTEGER},
+      </if>
+      <if test="git != null" >
+        git = #{git,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="sale != null" >
+        sale = #{sale,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNo != null" >
+        room_no = #{roomNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        cycle = #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="refund != null" >
+        refund = #{refund,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="weChar != null" >
+        we_char = #{weChar,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gId != null" >
+        g_id = #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null" >
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neuedu.pojo.Student" >
+    update student
+    set no = #{no,jdbcType=INTEGER},
+      git = #{git,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      sale = #{sale,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      room_no = #{roomNo,jdbcType=VARCHAR},
+      cycle = #{cycle,jdbcType=VARCHAR},
+      refund = #{refund,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      we_char = #{weChar,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      g_id = #{gId,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      img = #{img,jdbcType=LONGVARCHAR},
+      mark = #{mark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Student" >
+    update student
+    set no = #{no,jdbcType=INTEGER},
+      git = #{git,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      sale = #{sale,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      room_no = #{roomNo,jdbcType=VARCHAR},
+      cycle = #{cycle,jdbcType=VARCHAR},
+      refund = #{refund,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      we_char = #{weChar,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      g_id = #{gId,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      pwd = #{pwd,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

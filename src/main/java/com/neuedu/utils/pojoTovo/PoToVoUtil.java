@@ -52,7 +52,7 @@ public class PoToVoUtil {
 
     //转换就业数据详情vo类公司相关
     public static JobListVOCompanyDetil getNewCompanyDetil(PageInfo pi,
-                                                           String cname, double jobnum, double offernum, double avgMoney){
+                                                           String cname, double jobnum, double offernum, double avgMoney,int cin){
 
         JobListVOCompanyDetil jlvc = new JobListVOCompanyDetil();
         //公司名称
@@ -62,7 +62,7 @@ public class PoToVoUtil {
         //总offer人数
         jlvc.setC_offer(offernum);
         //总入职人数
-
+        jlvc.setC_in(cin);
         //通过比率
         String s = "";
         if(offernum == 0 || jobnum == 0){

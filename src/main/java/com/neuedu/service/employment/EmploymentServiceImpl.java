@@ -178,7 +178,7 @@ public class EmploymentServiceImpl implements IemploymentService {
 
             PageInfo pi = new PageInfo(li, 4);
             //集合数据不为空，封装对应VO类
-            JobListVOCompanyDetil jlvc = PoToVoUtil.getNewCompanyDetil(pi,p.getCname(),jobnum, offernum, avgMoney);
+            JobListVOCompanyDetil jlvc = PoToVoUtil.getNewCompanyDetil(pi,p.getCname(),jobnum, offernum, avgMoney,cin);
 
             //返回数据
             sr = ServerResponse.createServerResponseBySuccess(jlvc);
@@ -229,6 +229,7 @@ public class EmploymentServiceImpl implements IemploymentService {
         //vo类转化
         JobListVOCompany aNew = PoToVoUtil.getNewCompany(c_name, jobnum, offernum, avgMoney);
 
+        sr = ServerResponse.createServerResponseBySuccess(aNew);
         return sr;
     }
 

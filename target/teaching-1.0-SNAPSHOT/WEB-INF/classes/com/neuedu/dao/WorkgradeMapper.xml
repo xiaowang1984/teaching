@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.WorkgradeMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.pojo.Workgrade" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="w_id" property="wId" jdbcType="INTEGER" />
+    <result column="dat" property="dat" jdbcType="DATE" />
+    <result column="adds" property="adds" jdbcType="INTEGER" />
+    <result column="dels" property="dels" jdbcType="INTEGER" />
+    <result column="stucount" property="stucount" jdbcType="INTEGER" />
+    <result column="stucommit" property="stucommit" jdbcType="INTEGER" />
+    <result column="person" property="person" jdbcType="INTEGER" />
+    <result column="avgtime" property="avgtime" jdbcType="TIME" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, w_id, dat, adds, dels, stucount, stucommit, person, avgtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.WorkgradeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from workgrade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from workgrade
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from workgrade
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.pojo.WorkgradeExample" >
+    delete from workgrade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.pojo.Workgrade" >
+    insert into workgrade (id, w_id, dat, adds, 
+      dels, stucount, stucommit, 
+      person, avgtime)
+    values (#{id,jdbcType=INTEGER}, #{wId,jdbcType=INTEGER}, #{dat,jdbcType=DATE}, #{adds,jdbcType=INTEGER}, 
+      #{dels,jdbcType=INTEGER}, #{stucount,jdbcType=INTEGER}, #{stucommit,jdbcType=INTEGER}, 
+      #{person,jdbcType=INTEGER}, #{avgtime,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.pojo.Workgrade" >
+    insert into workgrade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="wId != null" >
+        w_id,
+      </if>
+      <if test="dat != null" >
+        dat,
+      </if>
+      <if test="adds != null" >
+        adds,
+      </if>
+      <if test="dels != null" >
+        dels,
+      </if>
+      <if test="stucount != null" >
+        stucount,
+      </if>
+      <if test="stucommit != null" >
+        stucommit,
+      </if>
+      <if test="person != null" >
+        person,
+      </if>
+      <if test="avgtime != null" >
+        avgtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="wId != null" >
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="dat != null" >
+        #{dat,jdbcType=DATE},
+      </if>
+      <if test="adds != null" >
+        #{adds,jdbcType=INTEGER},
+      </if>
+      <if test="dels != null" >
+        #{dels,jdbcType=INTEGER},
+      </if>
+      <if test="stucount != null" >
+        #{stucount,jdbcType=INTEGER},
+      </if>
+      <if test="stucommit != null" >
+        #{stucommit,jdbcType=INTEGER},
+      </if>
+      <if test="person != null" >
+        #{person,jdbcType=INTEGER},
+      </if>
+      <if test="avgtime != null" >
+        #{avgtime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.pojo.WorkgradeExample" resultType="java.lang.Integer" >
+    select count(*) from workgrade
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update workgrade
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.wId != null" >
+        w_id = #{record.wId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dat != null" >
+        dat = #{record.dat,jdbcType=DATE},
+      </if>
+      <if test="record.adds != null" >
+        adds = #{record.adds,jdbcType=INTEGER},
+      </if>
+      <if test="record.dels != null" >
+        dels = #{record.dels,jdbcType=INTEGER},
+      </if>
+      <if test="record.stucount != null" >
+        stucount = #{record.stucount,jdbcType=INTEGER},
+      </if>
+      <if test="record.stucommit != null" >
+        stucommit = #{record.stucommit,jdbcType=INTEGER},
+      </if>
+      <if test="record.person != null" >
+        person = #{record.person,jdbcType=INTEGER},
+      </if>
+      <if test="record.avgtime != null" >
+        avgtime = #{record.avgtime,jdbcType=TIME},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update workgrade
+    set id = #{record.id,jdbcType=INTEGER},
+      w_id = #{record.wId,jdbcType=INTEGER},
+      dat = #{record.dat,jdbcType=DATE},
+      adds = #{record.adds,jdbcType=INTEGER},
+      dels = #{record.dels,jdbcType=INTEGER},
+      stucount = #{record.stucount,jdbcType=INTEGER},
+      stucommit = #{record.stucommit,jdbcType=INTEGER},
+      person = #{record.person,jdbcType=INTEGER},
+      avgtime = #{record.avgtime,jdbcType=TIME}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.pojo.Workgrade" >
+    update workgrade
+    <set >
+      <if test="wId != null" >
+        w_id = #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="dat != null" >
+        dat = #{dat,jdbcType=DATE},
+      </if>
+      <if test="adds != null" >
+        adds = #{adds,jdbcType=INTEGER},
+      </if>
+      <if test="dels != null" >
+        dels = #{dels,jdbcType=INTEGER},
+      </if>
+      <if test="stucount != null" >
+        stucount = #{stucount,jdbcType=INTEGER},
+      </if>
+      <if test="stucommit != null" >
+        stucommit = #{stucommit,jdbcType=INTEGER},
+      </if>
+      <if test="person != null" >
+        person = #{person,jdbcType=INTEGER},
+      </if>
+      <if test="avgtime != null" >
+        avgtime = #{avgtime,jdbcType=TIME},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Workgrade" >
+    update workgrade
+    set w_id = #{wId,jdbcType=INTEGER},
+      dat = #{dat,jdbcType=DATE},
+      adds = #{adds,jdbcType=INTEGER},
+      dels = #{dels,jdbcType=INTEGER},
+      stucount = #{stucount,jdbcType=INTEGER},
+      stucommit = #{stucommit,jdbcType=INTEGER},
+      person = #{person,jdbcType=INTEGER},
+      avgtime = #{avgtime,jdbcType=TIME}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="batchload" parameterType="java.util.Date">
+    insert into workgrade(w_id,dat,adds,dels,stucount,stucommit,person,avgtime)
+    (select a.w_id,
+			a.dat,
+			sum(a.additions) as adds,
+			sum(a.deletions) as dels,
+			(select count(id) from student where g_id=(select gid from work where id=a.w_id) and status=1) as stucount,
+			count(a.id) as stucommit,
+			count(DISTINCT a.s_id) as person,
+			CONCAT(FLOOR(avg(HOUR(a.tim)*60+MINUTE(a.tim))/60),':',FLOOR(avg(HOUR(a.tim)*60+MINUTE(a.tim))%60),':00')
+		from workcommit as a
+	  where a.dat=#{1,jdbcType=DATE}
+      group by a.w_id,a.dat)
+  </insert>
+  <select id="getlast" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select * from workgrade where w_id=#{1} order by dat desc limit 1
+  </select>
+</mapper>
