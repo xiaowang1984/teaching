@@ -285,6 +285,6 @@
       group by a.w_id,a.dat)
   </insert>
   <select id="getCountByWid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-      select sum(adds) from workgrade where w_id=#{1}
+      select ifnull(sum(adds),0) from workgrade where w_id=#{1}
   </select>
 </mapper>
