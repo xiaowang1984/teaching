@@ -284,7 +284,7 @@
 	  where a.dat=#{1,jdbcType=DATE}
       group by a.w_id,a.dat)
   </insert>
-  <select id="getlast" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-      select * from workgrade where w_id=#{1} order by dat desc limit 1
+  <select id="getCountByWid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select sum(adds) from workgrade where w_id=#{1}
   </select>
 </mapper>
