@@ -45,10 +45,8 @@ public class WorkController {
             int stucount = studentService.count(entry.getGid());
             if(stucount!=0)
                 entry.setDone(donecount*100/stucount);
-            Workgrade last = workGradeService.getLast(entry.getId());
-            if(last!=null)
-                if(stucount!=0)
-                    entry.setCode((last.getAdds()-last.getDels())/stucount);
+           int adds=workGradeService.getCountByWid(entry.getId());
+           entry.setCode(adds/stucount);
         }
         if(list instanceof Page)
             return new Result(list,((Page<Work>)list).getPages(),((Page<Work>)list).getPageNum());

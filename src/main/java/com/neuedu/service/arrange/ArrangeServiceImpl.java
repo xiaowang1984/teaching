@@ -105,7 +105,7 @@ public class ArrangeServiceImpl implements IarrangeService{
     public List<Arrange> getBoard(int gId) {
         ArrangeExample example = new ArrangeExample();
         example.createCriteria().andGIdEqualTo(gId).andIsDelEqualTo(1);
-        example.setOrderByClause("id asc");
+        example.setOrderByClause("start_date asc");
         List<Arrange> arranges = arrangeMapper.selectByExample(example);
         for (Arrange arrange : arranges){
             arrange.setArrangeList(arrangeListService.getListByAid(arrange.getId()));

@@ -26,12 +26,8 @@ public class WorkGradeServiceImpl implements IworkGradeService{
         return workgradeMapper.selectByExample(workgradeExample);
     }
     @Override
-    public Workgrade getLast(int wId){
-       List<Workgrade> workgrades= workgradeMapper.getlast(wId);
-       if(workgrades.size()>0)
-           return workgrades.get(0);
-       else
-           return null;
+    public int getCountByWid(int wId){
+       return workgradeMapper.getCountByWid(wId);
     }
 
     @Override

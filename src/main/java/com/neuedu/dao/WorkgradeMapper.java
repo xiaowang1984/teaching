@@ -32,5 +32,5 @@ public interface WorkgradeMapper {
 
     int batchload(Date date);
 
-    List<Workgrade> getlast(int wId);
+    int getCountByWid(int wId);
 }
