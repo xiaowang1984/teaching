@@ -462,4 +462,69 @@
       a.s_id=#{1}
     </where>
   </select>
+
+
+  <!--///////////zhangxin////////////-->
+  <!--//获取就业信息数据-->
+  <select id="selectAllJobs" parameterType="com.neuedu.vo.ParmaVOAll" resultMap="BaseResultMap">
+    select id,s_id,c_name,j_id, is_skill, type, offer, t_id, probation, practice, salary, insurance, fund, month,
+    stock, other, choice, c_date, offer_date, is_del
+    from employment
+    <where>
+      <if test="c_name != null and c_name !=''">
+        c_name = #{c_name}
+      </if>
+    </where>
+  </select>
+
+  <!--获取就业信息详情-->
+  <select id="selectJobsDetil" resultType="com.neuedu.pojo.Employment"></select>
+
+  <!--按公司名称获取面试人数-->
+  <select id="selectJobNum" parameterType="string" resultType="java.lang.Integer">
+        SELECT count(c_name) FROM employment WHERE c_name=#{cname}
+    </select>
+  <!--按公司名称获取有offer的人数-->
+  <select id="selectOfferNum" parameterType="string" resultType="java.lang.Integer">
+        SELECT count(c_name) FROM employment WHERE c_name=#{cname} and offer=1
+    </select>
+  <!--按公司名称统计平均工资-->
+  <select id="selectAvgMoney" parameterType="string" resultType="java.lang.Double">
+        SELECT avg(salary) FROM employment WHERE c_name=#{cname} and offer=1;
+    </select>
+  <!--获取所有公司名称-->
+  <select id="selectAllCompany" resultType="string">
+        SELECT c_name FROM employment GROUP BY c_name
+    </select>
+  <!--参加该公司面试的人员详情-->
+  <select id="selectJobDetilByCname" parameterType="com.neuedu.vo.ParmaVODetil" resultType="com.neuedu.vo.JobListCompanyDetil">
+    select grade.name as gname,student.name as sname,student.school,employment.salary,job.name as jname FROM employment,student,grade,job
+    <where>
+      employment.s_id=student.id AND student.g_id = grade.id AND employment.j_id = job.id
+      AND employment.c_name =#{cname}
+      <if test="is_job == 1">
+        AND employment.offer = #{is_job};
+      </if>
+    </where>
+  </select>
+
+  <!--获取每家公司就业数据-->
+  <select id="selectAllJobByCompany"  resultType="com.neuedu.vo.JobListVOCompany">
+        SELECT a.c_name,b.c_num,c.c_money FROM
+        (SELECT c_name FROM employment GROUP BY c_name) as a,
+        (SELECT c_name,count(c_name) as c_num FROM employment GROUP BY c_name) as b,
+        (SELECT c_name,avg(salary) as c_money FROM employment GROUP BY c_name) as c
+          WHERE a.c_name = b.c_name AND a.c_name = c.c_name
+    </select>
+
+  <!--判断公司是否存在-->
+  <select id="selectByCompany" resultType="java.lang.Integer">
+        select count(1) from  employment where c_name = #{c_name}
+    </select>
+
+  <!--获取每家公司入职人数-->
+  <select id="selectByChoce" resultType="java.lang.Integer">
+        select count(1) from  employment where c_name = #{c_name} and choice=1
+    </select>
+
 </mapper>

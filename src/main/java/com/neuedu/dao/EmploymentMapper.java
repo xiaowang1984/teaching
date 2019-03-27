@@ -69,4 +69,5 @@ public interface EmploymentMapper {
     int selectByCompany(String c_name);
 
     int selectByChoce(String cname);
+
 }
