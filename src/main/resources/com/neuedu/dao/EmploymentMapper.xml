@@ -463,8 +463,6 @@
     </where>
   </select>
 
-
-
   <!--///////////zhangxin////////////-->
   <!--//获取就业信息数据-->
   <select id="selectAllJobs" parameterType="com.neuedu.vo.ParmaVOAll" resultMap="BaseResultMap">
