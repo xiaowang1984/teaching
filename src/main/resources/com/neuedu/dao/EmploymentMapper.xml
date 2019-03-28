@@ -502,7 +502,7 @@
       employment.s_id=student.id AND student.g_id = grade.id AND employment.j_id = job.id
       AND employment.c_name =#{cname}
       <if test="is_job == 1">
-        AND employment.offer = #{is_job};
+        AND employment.offer = #{is_job}
       </if>
     </where>
   </select>
