@@ -463,7 +463,6 @@
     </where>
   </select>
 
-
   <!--///////////zhangxin////////////-->
   <!--//获取就业信息数据-->
   <select id="selectAllJobs" parameterType="com.neuedu.vo.ParmaVOAll" resultMap="BaseResultMap">
@@ -526,5 +525,4 @@
   <select id="selectByChoce" resultType="java.lang.Integer">
         select count(1) from  employment where c_name = #{c_name} and choice=1
     </select>
-
 </mapper>
