@@ -489,7 +489,7 @@
     </select>
   <!--按公司名称统计平均工资-->
   <select id="selectAvgMoney" parameterType="string" resultType="java.lang.Double">
-        SELECT avg(salary) FROM employment WHERE c_name=#{cname} and offer=1;
+        SELECT avg(salary) FROM employment WHERE c_name=#{cname} and offer=1
     </select>
   <!--获取所有公司名称-->
   <select id="selectAllCompany" resultType="string">

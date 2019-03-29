@@ -66,7 +66,7 @@ public interface EmploymentMapper {
     List<JobListVOCompany> selectAllJobByCompany();
 
     //判断公司是否存在
-    int selectByCompany(String c_name);
+    Integer selectByCompany(String c_name);
 
-    int selectByChoce(String cname);
+    Integer selectByChoce(String cname);
 }

@@ -102,8 +102,12 @@ public class EmploymentServiceImpl implements IemploymentService {
             } else {
                 for (JobListVOCompany jlvc : li) {
                     //获取每家公司offer人数
-                    double offernum = employmentMapper.selectOfferNum(jlvc.getC_name());
-
+                    Integer om = employmentMapper.selectOfferNum(jlvc.getC_name());
+                    //空值处理
+                    double offernum = 0;
+                    if(om != null){
+                        offernum = om;
+                    }
                     //设置offer人数
                     jlvc.setC_offer(offernum);
 
@@ -165,16 +169,30 @@ public class EmploymentServiceImpl implements IemploymentService {
             }
 
             //获取每家公司面试人数
-            double jobnum = employmentMapper.selectJobNum(p.getCname());
+            Integer jm = employmentMapper.selectJobNum(p.getCname());
+            //空值处理
+            double jobnum = 0;
+            if(jm != null){
+                jobnum = jm;
+            }
             //获取每家公司offer人数
-            double offernum = employmentMapper.selectOfferNum(p.getCname());
+            Integer om = employmentMapper.selectOfferNum(p.getCname());
+            //空值处理
+            double offernum = 0;
+            if(om != null){
+                offernum = om;
+            }
             //获取每家公司平均薪资
             Double avgMoney = employmentMapper.selectAvgMoney(p.getCname());
             if (avgMoney == null) {
                 avgMoney = 0.00;
             }
             //获取每家公司入职人数
-            int cin = employmentMapper.selectByChoce(p.getCname());
+            Integer cin = employmentMapper.selectByChoce(p.getCname());
+            //空值处理
+            if(cin == null){
+                cin = 0;
+            }
 
             PageInfo pi = new PageInfo(li, 4);
             //集合数据不为空，封装对应VO类
@@ -218,9 +236,20 @@ public class EmploymentServiceImpl implements IemploymentService {
         }
         //封裝VO类
         //获取每家公司面试人数
-        double jobnum = employmentMapper.selectJobNum(c_name);
+        Integer jm = employmentMapper.selectJobNum(c_name);
+        //空值处理
+        double jobnum = 0;
+        if(jm != null){
+            jobnum = jm;
+        }
         //获取每家公司offer人数
-        double offernum = employmentMapper.selectOfferNum(c_name);
+        Integer om = employmentMapper.selectOfferNum(c_name);
+        //空值处理
+        double offernum = 0;
+        if(om != null){
+            offernum = om;
+        }
+
         //获取每家公司平均薪资
         Double avgMoney = employmentMapper.selectAvgMoney(c_name);
         if (avgMoney == null) {
