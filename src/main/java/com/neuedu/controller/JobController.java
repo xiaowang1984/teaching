@@ -18,24 +18,29 @@ import java.util.List;
 public class JobController {
     @Resource
     IjobService jobService;
+
+    /*获取所有岗位名称，并分页*/
     @GetMapping("/list")
-    public Result list(Job job){
+    public Result list(Job job) {
         List<Job> jobs = jobService.getJobs(job);
-        if(jobs instanceof Page)
+        if (jobs instanceof Page)
             return new Result(jobs, ((Page<Job>) jobs).getPages(), ((Page<Job>) jobs).getPageNum());
         else
-            return new Result(jobs,1 ,1 );
+            return new Result(jobs, 1, 1);
     }
+
     @GetMapping("/edit")
-    public Job getJobById(Integer id){
+    public Job getJobById(Integer id) {
         return jobService.getJobById(id);
     }
+
     @PostMapping("/add")
-    public Message add(Job job){
+    public Message add(Job job) {
         return new Message(jobService.add(job));
     }
+
     @PostMapping("/edit")
-    public Message update(Job job){
+    public Message update(Job job) {
         return new Message(jobService.update(job));
     }
 }

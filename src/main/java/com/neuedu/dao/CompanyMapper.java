@@ -27,4 +27,8 @@ public interface CompanyMapper {
     int updateByPrimaryKeySelective(Company record);
 
     int updateByPrimaryKey(Company record);
+
+    /*======================zhangxin=2019.4.3=========================*/
+    //模糊查询公司数据
+    List<Company> fuzzySearchByName(String keyName);
 }

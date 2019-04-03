@@ -14,13 +14,18 @@ public class JobServiceImpl implements IjobService {
     @Resource
     JobMapper jobMapper;
 
+    /*获取所有岗位名称，并分页*/
     @Override
     public List<Job> getJobs(Job job) {
         JobExample jobExample = new JobExample();
-        if(job.getIsDel()!=null)
+
+        //如果岗位有效标记不是空
+        if (job.getIsDel() != null)
+            /*这里的作用是？*/
             jobExample.createCriteria().andIsDelEqualTo(job.getIsDel());
-        if(job.getWithPage()==1)
-            PageHelper.startPage(job.getPageNo(),job.getPageSize() );
+
+        if (job.getWithPage() == 1)
+            PageHelper.startPage(job.getPageNo(), job.getPageSize());
         return jobMapper.selectByExample(jobExample);
     }
 

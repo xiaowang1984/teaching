@@ -13,17 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        if(httpServletRequest.getSession().getAttribute("user")!=null)
-            return true;
-        else{
-           JSONObject jsonObject = new JSONObject();
-           httpServletResponse.setCharacterEncoding("UTF-8");
-            httpServletResponse.getWriter().print(JSONObject.toJSONString(new Message(-1,"会话已经丢失")) );
-            return false;
-        }
+//        if(httpServletRequest.getSession().getAttribute("user")!=null)
+//            return true;
+//        else{
+//           JSONObject jsonObject = new JSONObject();
+//           httpServletResponse.setCharacterEncoding("UTF-8");
+//            httpServletResponse.getWriter().print(JSONObject.toJSONString(new Message(-1,"会话已经丢失")) );
+//            return false;
+//        }
 
         //本地测试注释上面，打开下面这行，关闭登录验证
-//        return true;
+        return true;
     }
 
     @Override

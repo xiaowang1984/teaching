@@ -1,5 +1,7 @@
 package com.neuedu.common;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 public class Const {
 
     public static final String CURRENTUSER = "current_user";
@@ -99,7 +101,8 @@ public class Const {
     //处理就业数据相关
     public enum JobListEnum {
 
-        MSG_NULL(ResponseCode.MSG_NULL, "没有更多的就业信息~");
+        MSG_NULL(ResponseCode.MSG_NULL, "没有更多的就业信息~"),
+        PARAM_NULL(ResponseCode.ERROR,"参数不能为空");
         private int code;
         private String desc;
 
