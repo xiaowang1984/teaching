@@ -12,7 +12,7 @@ public class ServerResponse<T>  {
 
     private int status;//返回到前端的状态码
     private T data;//返回给前端的数据
-    private String msg;//当status！=0时，封装了错误信息
+    private String msg = null;//当status！=0时，封装了错误信息
 
     private ServerResponse() {
 

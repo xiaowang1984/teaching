@@ -21,6 +21,9 @@ public class LoginInterceptor implements HandlerInterceptor {
             httpServletResponse.getWriter().print(JSONObject.toJSONString(new Message(-1,"会话已经丢失")) );
             return false;
         }
+
+        //本地测试注释上面，打开下面这行，关闭登录验证
+//        return true;
     }
 
     @Override

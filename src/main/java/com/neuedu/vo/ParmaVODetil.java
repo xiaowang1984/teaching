@@ -21,7 +21,7 @@ public class ParmaVODetil {
 
     //企业=1&班级=0
     private Integer is_type;
-    //面试=0&offer=1
+    //面试=0&offer=1&入职人数=2
     private Integer is_job;
     //查询公司的名称
     private String cname;

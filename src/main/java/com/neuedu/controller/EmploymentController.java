@@ -8,10 +8,7 @@ import com.neuedu.pojo.Student;
 import com.neuedu.service.employment.IemploymentService;
 import com.neuedu.vo.ParmaVOAll;
 import com.neuedu.vo.ParmaVODetil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -59,11 +56,12 @@ public class EmploymentController {
 
     /*==========================zhangxin=============================*/
     /**
-     * @根据不同参数获取就业信息数据
+     * @根据不同参数获取就业信息数据，以公司分类
      * */
     @RequestMapping("/joblist")
-    public ServerResponse getJoblist(ParmaVOAll p){
-        ServerResponse sr = employmentService.getJoblist(p);
+    public ServerResponse getJoblist(@RequestParam(required = false,defaultValue="1")Integer pageNum,
+                                     @RequestParam(required = false,defaultValue="10")Integer pageSize){
+        ServerResponse sr = employmentService.getJoblist(pageNum,pageSize);
         return sr;
     }
 
@@ -80,8 +78,10 @@ public class EmploymentController {
      * @根据不同参数获取详细就业信息数据
      * */
     @RequestMapping("/joblistdetil")
-    public ServerResponse joblistdetil(ParmaVODetil p){
-        ServerResponse sr = employmentService.getJoblistDetil(p);
+    public ServerResponse joblistdetil(@RequestParam(required = false,defaultValue="1")Integer pageNum,
+                                       @RequestParam(required = false,defaultValue="10")Integer pageSize,
+                                       ParmaVODetil p){
+        ServerResponse sr = employmentService.getJoblistDetil(pageNum,pageSize,p);
         return sr;
     }
 

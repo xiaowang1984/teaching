@@ -501,8 +501,13 @@
     <where>
       employment.s_id=student.id AND student.g_id = grade.id AND employment.j_id = job.id
       AND employment.c_name =#{cname}
+      /*查询已经有offer的人数*/
       <if test="is_job == 1">
         AND employment.offer = #{is_job}
+      </if>
+      /*查询已经入职的人数*/
+      <if test="is_job == 2">
+        AND employment.choice = 1
       </if>
     </where>
   </select>

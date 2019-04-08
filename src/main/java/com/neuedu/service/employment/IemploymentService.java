@@ -21,10 +21,10 @@ public interface IemploymentService {
     List<Map<String,Object>> reportByStudent(int sId);
 
     /*================zhangxin===============*/
-    //获取就业信息数据
-    ServerResponse<Employment> getJoblist(ParmaVOAll p);
+    //获取就业信息数据,以公司分类
+    ServerResponse<Employment> getJoblist(Integer pageNum,Integer pageSize);
     //根据不同参数获取详细就业信息数据
-    ServerResponse<Employment> getJoblistDetil(ParmaVODetil p);
+    ServerResponse<Employment> getJoblistDetil(Integer pageNum,Integer pageSize,ParmaVODetil p);
     //根据公司名称获取就业信息数据
     ServerResponse<Employment> getJoblistCname(String c_name);
 
