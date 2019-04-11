@@ -49,6 +49,7 @@ public class CompanyController {
 
     /**
      * @模糊查询公司数据
+     * @2019.4.11 弃用
      */
     @RequestMapping("/fuzzySearch")
     public ServerResponse fuzzySearch(@RequestParam(required = false,defaultValue = "1") Integer pageNum,

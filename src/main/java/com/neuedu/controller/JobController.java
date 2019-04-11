@@ -1,10 +1,12 @@
 package com.neuedu.controller;
 
 import com.github.pagehelper.Page;
+import com.neuedu.common.ServerResponse;
 import com.neuedu.message.Message;
 import com.neuedu.pojo.Job;
 import com.neuedu.pojo.Result;
 import com.neuedu.service.job.IjobService;
+import com.neuedu.service.worktype.WorkTypeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,20 @@ public class JobController {
     @PostMapping("/edit")
     public Message update(Job job) {
         return new Message(jobService.update(job));
+    }
+
+    /*=========================zhangxin 2019.4.10 在这里增加一个获取所有岗位方向的请求=============*/
+
+    @Resource
+    WorkTypeService wts;
+
+    /**
+     * @获取所有岗位方向的请求
+     */
+    @RequestMapping("/worktypelist")
+    public ServerResponse worktypelist() {
+        //获取所有方位方向数据
+        ServerResponse sr = wts.selectAll();
+        return sr;
     }
 }

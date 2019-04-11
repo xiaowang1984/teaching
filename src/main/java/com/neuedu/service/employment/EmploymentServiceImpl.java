@@ -148,7 +148,22 @@ public class EmploymentServiceImpl implements IemploymentService {
 
         //参加该公司面试的人员详情
         PageHelper.startPage(pageNum,pageSize);
-        List<JobListCompanyDetil> li = employmentMapper.selectJobDetilByCname(p);
+
+        //zhangxin2019.4.10 对is_job参数做判断，获取不同的数据
+        List<JobListCompanyDetil> li = null;
+        if(p.getIs_job() == 0){
+            //面试人员详情
+            li = employmentMapper.selectJobDetilByCname0(p);
+        }
+        if(p.getIs_job() == 1){
+            //offer人员详情
+            li = employmentMapper.selectJobDetilByCname1(p);
+        }
+        if(p.getIs_job() == 2){
+            //入职人员详情
+            li = employmentMapper.selectJobDetilByCname2(p);
+        }
+
 
         //集合数据为空
         if (li == null || li.size() == 0) {

@@ -22,7 +22,8 @@ public class JobServiceImpl implements IjobService {
         //如果岗位有效标记不是空
         if (job.getIsDel() != null)
             /*这里的作用是？*/
-            jobExample.createCriteria().andIsDelEqualTo(job.getIsDel());
+            //获取不同类型的岗位
+            jobExample.createCriteria().andIsDelEqualTo(job.getIsDel()).andIs_TypeEqualTo(job.getIs_type());
 
         if (job.getWithPage() == 1)
             PageHelper.startPage(job.getPageNo(), job.getPageSize());
@@ -43,4 +44,7 @@ public class JobServiceImpl implements IjobService {
     public int update(Job job) {
         return jobMapper.updateByPrimaryKeySelective(job);
     }
+
+
+
 }

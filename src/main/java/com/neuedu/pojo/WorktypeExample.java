@@ -3,14 +3,14 @@ package com.neuedu.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JobExample {
+public class WorktypeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public JobExample() {
+    public WorktypeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,194 +164,133 @@ public class JobExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("name is null");
+        public Criteria andFnameIsNull() {
+            addCriterion("fname is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNotNull() {
-            addCriterion("name is not null");
+        public Criteria andFnameIsNotNull() {
+            addCriterion("fname is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("name =", value, "name");
+        public Criteria andFnameEqualTo(String value) {
+            addCriterion("fname =", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("name <>", value, "name");
+        public Criteria andFnameNotEqualTo(String value) {
+            addCriterion("fname <>", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("name >", value, "name");
+        public Criteria andFnameGreaterThan(String value) {
+            addCriterion("fname >", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("name >=", value, "name");
+        public Criteria andFnameGreaterThanOrEqualTo(String value) {
+            addCriterion("fname >=", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThan(String value) {
-            addCriterion("name <", value, "name");
+        public Criteria andFnameLessThan(String value) {
+            addCriterion("fname <", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("name <=", value, "name");
+        public Criteria andFnameLessThanOrEqualTo(String value) {
+            addCriterion("fname <=", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameLike(String value) {
-            addCriterion("name like", value, "name");
+        public Criteria andFnameLike(String value) {
+            addCriterion("fname like", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("name not like", value, "name");
+        public Criteria andFnameNotLike(String value) {
+            addCriterion("fname not like", value, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+        public Criteria andFnameIn(List<String> values) {
+            addCriterion("fname in", values, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+        public Criteria andFnameNotIn(List<String> values) {
+            addCriterion("fname not in", values, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("name between", value1, value2, "name");
+        public Criteria andFnameBetween(String value1, String value2) {
+            addCriterion("fname between", value1, value2, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("name not between", value1, value2, "name");
+        public Criteria andFnameNotBetween(String value1, String value2) {
+            addCriterion("fname not between", value1, value2, "fname");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelIsNull() {
-            addCriterion("is_del is null");
+        public Criteria andFidIsNull() {
+            addCriterion("fid is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelIsNotNull() {
-            addCriterion("is_del is not null");
+        public Criteria andFidIsNotNull() {
+            addCriterion("fid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelEqualTo(Integer value) {
-            addCriterion("is_del =", value, "isDel");
+        public Criteria andFidEqualTo(Integer value) {
+            addCriterion("fid =", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotEqualTo(Integer value) {
-            addCriterion("is_del <>", value, "isDel");
+        public Criteria andFidNotEqualTo(Integer value) {
+            addCriterion("fid <>", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelGreaterThan(Integer value) {
-            addCriterion("is_del >", value, "isDel");
+        public Criteria andFidGreaterThan(Integer value) {
+            addCriterion("fid >", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_del >=", value, "isDel");
+        public Criteria andFidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("fid >=", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelLessThan(Integer value) {
-            addCriterion("is_del <", value, "isDel");
+        public Criteria andFidLessThan(Integer value) {
+            addCriterion("fid <", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelLessThanOrEqualTo(Integer value) {
-            addCriterion("is_del <=", value, "isDel");
+        public Criteria andFidLessThanOrEqualTo(Integer value) {
+            addCriterion("fid <=", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelIn(List<Integer> values) {
-            addCriterion("is_del in", values, "isDel");
+        public Criteria andFidIn(List<Integer> values) {
+            addCriterion("fid in", values, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotIn(List<Integer> values) {
-            addCriterion("is_del not in", values, "isDel");
+        public Criteria andFidNotIn(List<Integer> values) {
+            addCriterion("fid not in", values, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelBetween(Integer value1, Integer value2) {
-            addCriterion("is_del between", value1, value2, "isDel");
+        public Criteria andFidBetween(Integer value1, Integer value2) {
+            addCriterion("fid between", value1, value2, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_del not between", value1, value2, "isDel");
-            return (Criteria) this;
-        }
-
-        /*=========zhangin 2019.4.11 新增===============*/
-        public Criteria andIs_TypeIsNull() {
-            addCriterion("is_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeIsNotNull() {
-            addCriterion("is_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeEqualTo(Integer value) {
-            addCriterion("is_type =", value, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeNotEqualTo(Integer value) {
-            addCriterion("is_type <>", value, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeGreaterThan(Integer value) {
-            addCriterion("is_type >", value, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_type >=", value, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeLessThan(Integer value) {
-            addCriterion("is_type <", value, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeLessThanOrEqualTo(Integer value) {
-            addCriterion("is_type <=", value, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeIn(List<Integer> values) {
-            addCriterion("is_type in", values, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeNotIn(List<Integer> values) {
-            addCriterion("is_type not in", values, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeBetween(Integer value1, Integer value2) {
-            addCriterion("is_type between", value1, value2, "is_type");
-            return (Criteria) this;
-        }
-
-        public Criteria andIs_TypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_type not between", value1, value2, "is_type");
+        public Criteria andFidNotBetween(Integer value1, Integer value2) {
+            addCriterion("fid not between", value1, value2, "fid");
             return (Criteria) this;
         }
     }

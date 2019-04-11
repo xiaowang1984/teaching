@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.neuedu.dao.JobMapper" >
-  <resultMap id="BaseResultMap" type="com.neuedu.pojo.Job" >
+<mapper namespace="com.neuedu.dao.WorktypeMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.pojo.Worktype" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="is_del" property="isDel" jdbcType="INTEGER" />
-    <result column="is_type" property="is_type" jdbcType="INTEGER" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, is_del,is_type
+    id, fname, fid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.JobExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.WorktypeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from job
+    from worktype
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +84,68 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from job
+    from worktype
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from job
+    delete from worktype
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.neuedu.pojo.JobExample" >
-    delete from job
+  <delete id="deleteByExample" parameterType="com.neuedu.pojo.WorktypeExample" >
+    delete from worktype
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.neuedu.pojo.Job" >
-    insert into job (id, name, is_del,is_type
+  <insert id="insert" parameterType="com.neuedu.pojo.Worktype" >
+    insert into worktype (id, fname, fid
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER},#{is_type,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.neuedu.pojo.Job" >
-    insert into job
+  <insert id="insertSelective" parameterType="com.neuedu.pojo.Worktype" >
+    insert into worktype
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="fname != null" >
+        fname,
       </if>
-      <if test="isDel != null" >
-        is_del,
-      </if>
-      <if test="is_type != null" >
-        is_type,
+      <if test="fid != null" >
+        fid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
       </if>
-      <if test="isDel != null" >
-        #{isDel,jdbcType=INTEGER},
-      </if>
-      <if test="is_type != null" >
-        #{is_type,jdbcType=INTEGER},
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neuedu.pojo.JobExample" resultType="java.lang.Integer" >
-    select count(*) from job
+  <select id="countByExample" parameterType="com.neuedu.pojo.WorktypeExample" resultType="java.lang.Integer" >
+    select count(*) from worktype
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map" >
-    update job
+    update worktype
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
       </if>
-      <if test="record.isDel != null" >
-        is_del = #{record.isDel,jdbcType=INTEGER},
-      </if>
-      <if test="record.is_type != null" >
-        is_type = #{record.is_type,jdbcType=INTEGER},
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,35 +153,36 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update job
+    update worktype
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      is_del = #{record.isDel,jdbcType=INTEGER}
-    is_type = #{record.is_type,jdbcType=INTEGER}
+      fname = #{record.fname,jdbcType=VARCHAR},
+      fid = #{record.fid,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.pojo.Job" >
-    update job
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.pojo.Worktype" >
+    update worktype
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
       </if>
-      <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=INTEGER},
-      </if>
-      <if test="is_type != null" >
-        is_type = #{is_type,jdbcType=INTEGER},
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Job" >
-    update job
-    set name = #{name,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=INTEGER},
-      is_type = #{is_type,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Worktype" >
+    update worktype
+    set fname = #{fname,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--==================================================================================-->
+  <!--查询所有数据-->
+  <select id="selectAll" resultType="com.neuedu.pojo.Worktype">
+    select id,fname,fid from worktype
+  </select>
 </mapper>

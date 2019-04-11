@@ -9,7 +9,6 @@ public class Employment {
     private Integer sId;
 
     private String cName;
-
     private Integer jId;
 
     private Integer isSkill;
@@ -38,11 +37,19 @@ public class Employment {
 
     private Integer choice;
 
-    private Date cDate;
+    //面试时间
+    private Date c_date;
 
-    private Date offerDate;
+    //获得offer时间
+    private Date offer_date;
+
+    //就业时间
+    private Date work_date;
 
     private Integer isDel;
+
+    //岗位方向代号
+    private Integer work_type;
 
     public Integer getId() {
         return id;
@@ -65,7 +72,7 @@ public class Employment {
     }
 
     public void setcName(String cName) {
-        this.cName = cName == null ? null : cName.trim();
+        this.cName = cName;
     }
 
     public Integer getjId() {
@@ -180,21 +187,30 @@ public class Employment {
         this.choice = choice;
     }
 
-    public Date getcDate() {
-        return cDate;
+    public Date getC_date() {
+        return c_date;
     }
 
-    public void setcDate(Date cDate) {
-        this.cDate = cDate;
+    public void setC_date(Date c_date) {
+        this.c_date = c_date;
     }
 
-    public Date getOfferDate() {
-        return offerDate;
+    public Date getWork_date() {
+        return work_date;
     }
 
-    public void setOfferDate(Date offerDate) {
-        this.offerDate = offerDate;
+    public void setWork_date(Date work_date) {
+        this.work_date = work_date;
     }
+
+    public Date getOffer_date() {
+        return offer_date;
+    }
+
+    public void setOffer_date(Date offer_date) {
+        this.offer_date = offer_date;
+    }
+
 
     public Integer getIsDel() {
         return isDel;
@@ -202,5 +218,13 @@ public class Employment {
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    public Integer getWork_type() {
+        return work_type;
+    }
+
+    public void setWork_type(Integer work_type) {
+        this.work_type = work_type;
     }
 }
