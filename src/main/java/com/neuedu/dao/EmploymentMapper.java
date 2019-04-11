@@ -60,8 +60,14 @@ public interface EmploymentMapper {
     //获取所有公司名称
     List<String> selectAllCompany();
 
-    //参加该公司面试的人员详情
-    List<JobListCompanyDetil> selectJobDetilByCname(ParmaVODetil p );
+    //根据公司名称获取面试人员详情
+    List<JobListCompanyDetil> selectJobDetilByCname0(ParmaVODetil p );
+    //根据公司名称获取offer人员详情
+    List<JobListCompanyDetil> selectJobDetilByCname1(ParmaVODetil p );
+    //根据公司名称获取入职人员详情
+    List<JobListCompanyDetil> selectJobDetilByCname2(ParmaVODetil p );
+
+
     //获取公司就业数据
     List<JobListVOCompany> selectAllJobByCompany();
 

@@ -7,6 +7,7 @@ import com.neuedu.common.ServerResponse;
 import com.neuedu.dao.CompanyMapper;
 import com.neuedu.pojo.Company;
 import com.neuedu.pojo.CompanyExample;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,10 +22,14 @@ public class CompanyServiceImpl implements IcompanyService {
     @Override
     public List<Company> getCompany(Company company) {
         CompanyExample companyExample = new CompanyExample();
+        CompanyExample.Criteria criteria = companyExample.createCriteria();
         if (company.getIsDel() != null)
-            companyExample.createCriteria().andIsDelEqualTo(company.getIsDel());
+            criteria.andIsDelEqualTo(company.getIsDel());
         if (company.getWithPage() == 1)
             PageHelper.startPage(company.getPageNo(), company.getPageSize());
+        if(StringUtils.isNotBlank(company.getName())){
+            criteria.andNameLike("%"+company.getName()+"%");
+        }
         return companyMapper.selectByExample(companyExample);
 
     }
@@ -81,6 +86,8 @@ public class CompanyServiceImpl implements IcompanyService {
 
         //成功返回数据
         PageInfo pi = new PageInfo(lico,4);
+        //这里对返回数据处理成Result,可以保障前端分页数据不出问题
+
         sr = ServerResponse.createServerResponseBySuccess(pi);
 
         return sr;

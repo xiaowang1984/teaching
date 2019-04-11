@@ -7,6 +7,17 @@ public class Job extends Page{
 
     private Integer isDel;
 
+    //是否为技术岗位
+    private Integer is_type;
+
+    public Integer getIs_type() {
+        return is_type;
+    }
+
+    public void setIs_type(Integer is_type) {
+        this.is_type = is_type;
+    }
+
     public Integer getId() {
         return id;
     }
