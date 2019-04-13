@@ -6,7 +6,7 @@
         <result column="s_id" property="sId" jdbcType="INTEGER"/>
         <result column="c_name" property="cName" jdbcType="VARCHAR"/>
         <result column="j_id" property="jId" jdbcType="INTEGER"/>
-        <result column="work_type" property="work_type" jdbcType="INTEGER"/>
+        <result column="work_type" property="workType" jdbcType="INTEGER"/>
         <result column="is_skill" property="isSkill" jdbcType="INTEGER"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="offer" property="offer" jdbcType="INTEGER"/>
@@ -20,9 +20,9 @@
         <result column="stock" property="stock" jdbcType="INTEGER"/>
         <result column="other" property="other" jdbcType="DECIMAL"/>
         <result column="choice" property="choice" jdbcType="INTEGER"/>
-        <result column="c_date" property="c_date" jdbcType="DATE"/>
-        <result column="offer_date" property="offer_date" jdbcType="DATE"/>
-        <result column="work_date" property="work_date" jdbcType="DATE"/>
+        <result column="c_date" property="cDate" jdbcType="DATE"/>
+        <result column="offer_date" property="offerDate" jdbcType="DATE"/>
+        <result column="work_date" property="workDate" jdbcType="DATE"/>
         <result column="is_del" property="isDel" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -132,8 +132,8 @@
       #{offer,jdbcType=INTEGER}, #{tId,jdbcType=INTEGER}, #{probation,jdbcType=DECIMAL}, 
       #{practice,jdbcType=DECIMAL}, #{salary,jdbcType=DECIMAL}, #{insurance,jdbcType=INTEGER}, 
       #{fund,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, #{stock,jdbcType=INTEGER}, 
-      #{other,jdbcType=DECIMAL}, #{choice,jdbcType=INTEGER}, #{c_date,jdbcType=DATE},
-      #{offer_date,jdbcType=DATE},#{work_date,jdbcType=DATE}, #{isDel,jdbcType=INTEGER})
+      #{other,jdbcType=DECIMAL}, #{choice,jdbcType=INTEGER}, #{cDate,jdbcType=DATE},
+      #{offerDate,jdbcType=DATE},#{workDate,jdbcType=DATE}, #{isDel,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.neuedu.pojo.Employment">
         insert into employment
@@ -150,7 +150,7 @@
             <if test="jId != null">
                 j_id,
             </if>
-            <if test="work_type != null">
+            <if test="workType != null">
                 work_type,
             </if>
             <if test="isSkill != null">
@@ -192,13 +192,13 @@
             <if test="choice != null">
                 choice,
             </if>
-            <if test="c_date != null">
+
                 c_date,
-            </if>
-            <if test="offer_date != null">
+
+            <if test="offerDate != null">
                 offer_date,
             </if>
-            <if test="work_date != null">
+            <if test="workDate != null">
                 work_date,
             </if>
             <if test="isDel != null">
@@ -218,8 +218,8 @@
             <if test="jId != null">
                 #{jId,jdbcType=INTEGER},
             </if>
-            <if test="work_type != null">
-                #{work_type,jdbcType=INTEGER},
+            <if test="workType != null">
+                #{workType,jdbcType=INTEGER},
             </if>
             <if test="isSkill != null">
                 #{isSkill,jdbcType=INTEGER},
@@ -260,14 +260,17 @@
             <if test="choice != null">
                 #{choice,jdbcType=INTEGER},
             </if>
-            <if test="c_date != null">
-                #{c_date,jdbcType=DATE},
+            <if test="cDate != null">
+                #{cDate,jdbcType=DATE},
             </if>
-            <if test="offer_date != null">
-                #{offer_date,jdbcType=DATE},
+            <if test="cDate == null">
+                now(),
             </if>
-            <if test="work_date != null">
-                #{work_date,jdbcType=DATE},
+            <if test="offerDate != null">
+                #{offerDate,jdbcType=DATE},
+            </if>
+            <if test="workDate != null">
+                #{workDate,jdbcType=DATE},
             </if>
             <if test="isDel != null">
                 #{isDel,jdbcType=INTEGER},
@@ -296,7 +299,7 @@
                 j_id = #{record.jId,jdbcType=INTEGER},
             </if>
             <if test="record.jId != null">
-                work_type = #{record.work_type,jdbcType=INTEGER},
+                work_type = #{record.workType,jdbcType=INTEGER},
             </if>
             <if test="record.isSkill != null">
                 is_skill = #{record.isSkill,jdbcType=INTEGER},
@@ -337,14 +340,14 @@
             <if test="record.choice != null">
                 choice = #{record.choice,jdbcType=INTEGER},
             </if>
-            <if test="record.c_date != null">
-                c_date = #{record.c_date,jdbcType=DATE},
+            <if test="record.cDate != null">
+                c_date = #{record.cDate,jdbcType=DATE},
             </if>
-            <if test="record.offer_date != null">
-                offer_date = #{record.offer_date,jdbcType=DATE},
+            <if test="record.offerDate != null">
+                offer_date = #{record.offerDate,jdbcType=DATE},
             </if>
-            <if test="record.work_date != null">
-                work_date = #{record.work_date,jdbcType=DATE},
+            <if test="record.workDate != null">
+                work_date = #{record.workDate,jdbcType=DATE},
             </if>
             <if test="record.isDel != null">
                 is_del = #{record.isDel,jdbcType=INTEGER},
@@ -360,7 +363,7 @@
         s_id = #{record.sId,jdbcType=INTEGER},
         c_name = #{record.cName,jdbcType=VARCHAR},
         j_id = #{record.jId,jdbcType=INTEGER},
-        work_type = #{record.work_type,jdbcType=INTEGER},
+        work_type = #{record.workType,jdbcType=INTEGER},
         is_skill = #{record.isSkill,jdbcType=INTEGER},
         type = #{record.type,jdbcType=INTEGER},
         offer = #{record.offer,jdbcType=INTEGER},
@@ -374,9 +377,9 @@
         stock = #{record.stock,jdbcType=INTEGER},
         other = #{record.other,jdbcType=DECIMAL},
         choice = #{record.choice,jdbcType=INTEGER},
-        c_date = #{record.c_date,jdbcType=DATE},
-        offer_date = #{record.offer_date,jdbcType=DATE},
-        work_date = #{record.work_date,jdbcType=DATE},
+        c_date = #{record.cDate,jdbcType=DATE},
+        offer_date = #{record.offerDate,jdbcType=DATE},
+        work_date = #{record.workDate,jdbcType=DATE},
         is_del = #{record.isDel,jdbcType=INTEGER}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -394,8 +397,8 @@
             <if test="jId != null">
                 j_id = #{jId,jdbcType=INTEGER},
             </if>
-            <if test="work_type != null">
-                work_type = #{work_type,jdbcType=INTEGER},
+            <if test="workType != null">
+                work_type = #{workType,jdbcType=INTEGER},
             </if>
             <if test="isSkill != null">
                 is_skill = #{isSkill,jdbcType=INTEGER},
@@ -436,14 +439,14 @@
             <if test="choice != null">
                 choice = #{choice,jdbcType=INTEGER},
             </if>
-            <if test="c_date != null">
-                c_date = #{c_date,jdbcType=DATE},
+            <if test="cDate != null">
+                c_date = #{cDate,jdbcType=DATE},
             </if>
-            <if test="offer_date != null">
-                offer_date = #{offer_date,jdbcType=DATE},
+            <if test="offerDate != null">
+                offer_date = #{offerDate,jdbcType=DATE},
             </if>
-            <if test="work_date != null">
-                work_date = #{work_date,jdbcType=DATE},
+            <if test="workDate != null">
+                work_date = #{workDate,jdbcType=DATE},
             </if>
             <if test="isDel != null">
                 is_del = #{isDel,jdbcType=INTEGER},
@@ -456,7 +459,7 @@
     set s_id = #{sId,jdbcType=INTEGER},
       c_name = #{cName,jdbcType=VARCHAR},
       j_id = #{jId,jdbcType=INTEGER},
-      work_type = #{work_type,jdbcType=INTEGER},
+      work_type = #{workType,jdbcType=INTEGER},
       is_skill = #{isSkill,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       offer = #{offer,jdbcType=INTEGER},
@@ -470,9 +473,9 @@
       stock = #{stock,jdbcType=INTEGER},
       other = #{other,jdbcType=DECIMAL},
       choice = #{choice,jdbcType=INTEGER},
-      c_date = #{c_date,jdbcType=DATE},
-      offer_date = #{offer_date,jdbcType=DATE},
-      work_date = #{work_date,jdbcType=DATE},
+      c_date = #{cDate,jdbcType=DATE},
+      offer_date = #{offerDate,jdbcType=DATE},
+      work_date = #{workDate,jdbcType=DATE},
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
