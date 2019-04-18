@@ -9,7 +9,7 @@ public class Employment {
     private Integer sId;
 
     private String cName;
-    private Integer jId;
+    private Integer jId=999;
 
     private Integer isSkill;
 
