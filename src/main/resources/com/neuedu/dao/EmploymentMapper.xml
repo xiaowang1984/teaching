@@ -86,8 +86,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, s_id, c_name, j_id,work_type, is_skill, type, offer, t_id, probation, practice, salary,
-    insurance, fund, month, stock, other, choice, c_date, offer_date,work_date, is_del
+    id, s_id, c_name, j_id, is_skill, type, offer, t_id, probation, practice, salary,
+    insurance, fund, month, stock, other, choice, c_date, offer_date,work_date, is_del,work_type
   </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.pojo.EmploymentExample">
         select
