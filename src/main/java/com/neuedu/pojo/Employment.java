@@ -9,7 +9,7 @@ public class Employment {
     private Integer sId;
 
     private String cName;
-    private Integer jId;
+    private Integer jId=999;
 
     private Integer isSkill;
 
@@ -38,18 +38,18 @@ public class Employment {
     private Integer choice;
 
     //面试时间
-    private Date c_date;
+    private Date cDate;
 
     //获得offer时间
-    private Date offer_date;
+    private Date offerDate;
 
     //就业时间
-    private Date work_date;
+    private Date workDate;
 
     private Integer isDel;
 
     //岗位方向代号
-    private Integer work_type;
+    private Integer workType;
 
     public Integer getId() {
         return id;
@@ -187,30 +187,29 @@ public class Employment {
         this.choice = choice;
     }
 
-    public Date getC_date() {
-        return c_date;
+    public Date getcDate() {
+        return cDate;
     }
 
-    public void setC_date(Date c_date) {
-        this.c_date = c_date;
+    public void setcDate(Date cDate) {
+        this.cDate = cDate;
     }
 
-    public Date getWork_date() {
-        return work_date;
+    public Date getWorkDate() {
+        return workDate;
     }
 
-    public void setWork_date(Date work_date) {
-        this.work_date = work_date;
+    public void setWorkDate(Date workDate) {
+        this.workDate = workDate;
     }
 
-    public Date getOffer_date() {
-        return offer_date;
+    public Date getOfferDate() {
+        return offerDate;
     }
 
-    public void setOffer_date(Date offer_date) {
-        this.offer_date = offer_date;
+    public void setOfferDate(Date offerDate) {
+        this.offerDate = offerDate;
     }
-
 
     public Integer getIsDel() {
         return isDel;
@@ -220,11 +219,11 @@ public class Employment {
         this.isDel = isDel;
     }
 
-    public Integer getWork_type() {
-        return work_type;
+    public Integer getWorkType() {
+        return workType;
     }
 
-    public void setWork_type(Integer work_type) {
-        this.work_type = work_type;
+    public void setWorkType(Integer workType) {
+        this.workType = workType;
     }
 }

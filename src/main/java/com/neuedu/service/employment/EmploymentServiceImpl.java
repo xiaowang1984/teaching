@@ -32,11 +32,11 @@ public class EmploymentServiceImpl implements IemploymentService {
 
     @Override
     public int add(Employment employment) {
-        if (companyService.count(employment.getcName()) == 0) {
+        /*if (companyService.count(employment.getcName()) == 0) {
             Company company = new Company();
             company.setName(employment.getcName());
             companyService.add(company);
-        }
+        }*/
         return employmentMapper.insertSelective(employment);
     }
 
