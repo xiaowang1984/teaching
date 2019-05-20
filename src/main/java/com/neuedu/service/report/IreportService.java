@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IreportService {
     List<Moodday> getMooddays(Moodday moodday,Date end);
+    List<Moodday> getMooddaysByGid(Integer gId);
 }

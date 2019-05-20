@@ -70,7 +70,6 @@ public class StudentLogServiceImpl implements IstudentLogService {
             studentlogExample.createCriteria().andDatBetween(start, end).andSidEqualTo(stu.getId());
             stu.setStudentlogs(studentlogMapper.selectByExampleWithBLOBs(studentlogExample));
         }
-
         return students;
     }
 

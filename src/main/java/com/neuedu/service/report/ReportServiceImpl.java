@@ -23,4 +23,13 @@ public class ReportServiceImpl implements IreportService{
                 .andDatBetween(moodday.getDat(), end);
         return mooddayMapper.selectByExample(mooddayExample);
     }
+
+    @Override
+    public List<Moodday> getMooddaysByGid(Integer gId) {
+        MooddayExample mooddayExample = new MooddayExample();
+        mooddayExample.createCriteria().andGradeEqualTo(gId);
+        mooddayExample.setOrderByClause("dat asc");
+        return mooddayMapper.selectByExample(mooddayExample);
+    }
+
 }
