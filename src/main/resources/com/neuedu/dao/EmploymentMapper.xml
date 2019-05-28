@@ -586,4 +586,9 @@
     <select id="selectByChoce" resultType="java.lang.Integer">
         select count(1) from  employment where c_name = #{c_name} and choice=1
     </select>
+
+    <!--获取班级有offer的人数-->
+    <select id="selectOfferNumByGid" resultType="java.lang.Integer">
+        SELECT count(DISTINCT a.s_id) FROM employment as a,student as b WHERE a.s_id=b.id and b.g_id=#{gid} and a.offer=1;
+    </select>
 </mapper>

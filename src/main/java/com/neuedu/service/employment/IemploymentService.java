@@ -27,5 +27,6 @@ public interface IemploymentService {
     ServerResponse<Employment> getJoblistDetil(Integer pageNum,Integer pageSize,ParmaVODetil p);
     //根据公司名称获取就业信息数据
     ServerResponse<Employment> getJoblistCname(String c_name);
-
+    //根据班级id获取该班级offer人数
+    ServerResponse getClassONum(Integer gid);
 }

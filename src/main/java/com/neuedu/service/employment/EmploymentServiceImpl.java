@@ -252,4 +252,25 @@ public class EmploymentServiceImpl implements IemploymentService {
         return sr;
     }
 
+    //根据班级id获取该班级offer人数
+    @Override
+    public ServerResponse getClassONum(Integer gid) {
+        //创建高可用对象
+        ServerResponse sr = null;
+
+        //参数非空判断
+        if(gid == null){
+            sr = ServerResponse.createServerResponseByError(Const.JobListEnum.PARAM_NULL.getCode(),Const.JobListEnum.PARAM_NULL.getDesc());
+            return sr;
+        }
+
+        //判断班级是否存在
+
+        //参数不为空去数据库获取需要数据
+        Integer num = employmentMapper.selectOfferNumByGid(gid);
+
+        sr = ServerResponse.createServerResponseBySuccess(num);
+        return sr;
+    }
+
 }

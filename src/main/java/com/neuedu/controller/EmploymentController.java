@@ -96,11 +96,11 @@ public class EmploymentController {
     }
 
     /**
-     * @创建一个新公司
+     * @根据班级id获取该班级有offer的人数（一个人有多个offer只计算一次）
      */
-    @RequestMapping("/newcompany")
-    public ServerResponse<Employment> newcompany() {
-
-        return null;
+    @RequestMapping("/classonum")
+    public ServerResponse classonum(Integer gid) {
+        ServerResponse sr = employmentService.getClassONum(gid);
+        return sr;
     }
 }

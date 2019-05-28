@@ -74,5 +74,9 @@ public interface EmploymentMapper {
     //判断公司是否存在
     Integer selectByCompany(String c_name);
 
+    //获取每家公司入职人数
     Integer selectByChoce(String cname);
+
+    //获取班级获得offer的人数
+    Integer selectOfferNumByGid(Integer gid);
 }
