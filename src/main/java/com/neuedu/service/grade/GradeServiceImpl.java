@@ -11,6 +11,7 @@ import com.neuedu.pojo.Grade;
 import com.neuedu.pojo.GradeExample;
 import com.neuedu.service.arrange.IarrangeService;
 import com.neuedu.service.course.IcourseService;
+import com.neuedu.service.employment.IemploymentService;
 import com.neuedu.service.plan.IplanService;
 import com.neuedu.service.student.IstudentService;
 import com.neuedu.service.teacher.IteacherService;
@@ -38,6 +39,8 @@ public class GradeServiceImpl implements IgradeService {
     IcourseService courseService;
     @Resource
     IplanService planService;
+    @Resource
+    IemploymentService employmentService;
     @Override
     @Transactional
     public List<Grade> list(Grade grade) {
@@ -72,7 +75,7 @@ public class GradeServiceImpl implements IgradeService {
         grade.setLecturerName( teacherService.getTeacherById(grade.getLecturer()).getName());
         grade.setManagerName(teacherService.getTeacherById(grade.getManager()).getName());
         grade.setCount(studentService.count(grade.getId()));
-        grade.setOffer(studentService.offerCount(grade.getId()));
+        grade.setOffer(Integer.parseInt(employmentService.getClassONum(grade.getId()).getData().toString()));
     }
 
     @Override
