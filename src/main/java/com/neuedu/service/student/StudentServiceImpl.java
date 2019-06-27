@@ -77,6 +77,7 @@ public class StudentServiceImpl implements IstudentService {
             StudentExample.Criteria criteria = studentExample.createCriteria();
             criteria.andIdCardEqualTo(student.getIdCard().trim());
             if(studentMapper.countByExample(studentExample)>0){
+                student.setPwd(null);
                result += studentMapper.updateByExampleSelective(student, studentExample);
             }else{
                 result += studentMapper.insertSelective(student);

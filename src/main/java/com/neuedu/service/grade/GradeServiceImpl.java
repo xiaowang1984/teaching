@@ -5,10 +5,7 @@ import com.neuedu.core.Constants;
 import com.neuedu.dao.GradeMapper;
 import com.neuedu.dao.StudentMapper;
 import com.neuedu.dao.TeacherMapper;
-import com.neuedu.pojo.Arrange;
-import com.neuedu.pojo.Course;
-import com.neuedu.pojo.Grade;
-import com.neuedu.pojo.GradeExample;
+import com.neuedu.pojo.*;
 import com.neuedu.service.arrange.IarrangeService;
 import com.neuedu.service.course.IcourseService;
 import com.neuedu.service.plan.IplanService;
@@ -21,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
