@@ -158,4 +158,11 @@ public class StudentServiceImpl implements IstudentService {
         return update(student);
     }
 
+    @Override
+    public List<Student> getStudentsByGid(int gId, int status) {
+        StudentExample example = new StudentExample();
+        example.createCriteria().andGIdEqualTo(gId).andIsDelEqualTo(1).andStatusEqualTo(status);
+        return studentMapper.selectByExample(example);
+    }
+
 }

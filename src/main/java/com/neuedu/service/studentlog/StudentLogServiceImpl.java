@@ -64,7 +64,7 @@ public class StudentLogServiceImpl implements IstudentLogService {
 
     @Override
     public List<Student> getLogsByGid(Date start, Date end, int gId) {
-        List<Student> students = studentService.getStudentsByGid(gId);
+        List<Student> students = studentService.getStudentsByGid(gId,1);
         for (Student stu : students){
             StudentlogExample studentlogExample = new StudentlogExample();
             studentlogExample.createCriteria().andDatBetween(start, end).andSidEqualTo(stu.getId());
