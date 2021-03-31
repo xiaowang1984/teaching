@@ -18,7 +18,7 @@
         <mybatis.generator.version>1.3.2</mybatis.generator.version>
         <poi.version>3.14</poi.version>
         <fileupload.version>1.3.1</fileupload.version>
-        <guawa.version>25.1-jre</guawa.version>
+        <guawa.version>29.0-jre</guawa.version>
         <dozer.version>5.5.1</dozer.version>
     </properties>
     <parent>
